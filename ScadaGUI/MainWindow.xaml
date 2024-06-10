@@ -3,10 +3,88 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ScadaGUI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="SCADA" 
+        Height="720" 
+        Width="1280"
+        ResizeMode="CanResize"
+        WindowStartupLocation="CenterScreen"
+        TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+        TextElement.FontWeight="Regular"
+        TextElement.FontSize="13"
+        TextOptions.TextFormattingMode="Ideal"
+        TextOptions.TextRenderingMode="Auto"
+        SnapsToDevicePixels="True">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="15*"/>
+        </Grid.ColumnDefinitions>
         
+        <Grid Grid.Column="0">
+            <materialDesign:Card Margin="5">
+                
+            </materialDesign:Card>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0" Margin="5">
+                <UniformGrid Rows="1">
+                    <materialDesign:Card Margin="5">
+                        <UniformGrid Rows="1">
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40">0000</TextBlock>
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       FontSize="15"
+                                       Text="Analognih &#x0a;ulaza"/>
+                        </UniformGrid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="5">
+                        <UniformGrid Rows="1">
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40">0000</TextBlock>
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       FontSize="15"
+                                       Text="Analognih &#x0a;izlaza"/>
+                        </UniformGrid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="5">
+                        <UniformGrid Rows="1">
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40">0000</TextBlock>
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       FontSize="15"
+                                       Text="Digitalnih &#x0a;ulaza"/>
+                        </UniformGrid>
+                    </materialDesign:Card>
+                    <materialDesign:Card Margin="5">
+                        <UniformGrid Rows="1">
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       FontSize="40">0000</TextBlock>
+                            <TextBlock VerticalAlignment="Center"
+                                       HorizontalAlignment="Left"
+                                       FontSize="15"
+                                       Text="Digitalnih &#x0a;izlaza"/>
+                        </UniformGrid>
+                    </materialDesign:Card>
+                </UniformGrid>
+            </Grid>
+        </Grid>
+    
     </Grid>
 </Window>

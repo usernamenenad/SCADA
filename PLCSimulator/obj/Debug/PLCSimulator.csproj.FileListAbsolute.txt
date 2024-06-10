@@ -1,0 +1,12 @@
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\bin\Debug\PLCSimulator.dll.config
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\bin\Debug\PLCSimulator.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\bin\Debug\PLCSimulator.pdb
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\bin\Debug\EntityFramework.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\bin\Debug\EntityFramework.xml
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\obj\Debug\PLCSimulator.csproj.AssemblyReference.cache
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\obj\Debug\PLCSimulator.csproj.CoreCompileInputs.cache
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\obj\Debug\PLCSimul.7DFBA356.Up2Date
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\obj\Debug\PLCSimulator.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\PLCSimulator\obj\Debug\PLCSimulator.pdb

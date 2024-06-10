@@ -24,5 +24,10 @@ namespace ScadaGUI
         {
             InitializeComponent();
         }
+
+        private void Rectangle_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("Hello");
+        }
     }
 }

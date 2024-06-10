@@ -1,24 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-
 namespace PLCSimulator
 {
     /// <summary>
     /// PLC Simulator
     /// 
-    /// 4 x ANALOG INPUT : ADDR001 - ADDR004
-    /// 4 x ANALOG OUTPUT: ADDR005 - ADDR008
-    /// 1 x DIGITAL INPUT: ADDR009
-    /// 1 x DIGITAL OUTPUT: ADDR010
+    /// 4 x ANALOG INPUT   : ADDR001 - ADDR004
+    /// 4 x ANALOG OUTPUT  : ADDR005 - ADDR008
+    /// 4 x DIGITAL INPUT  : ADDR009 - ADDR012
+    /// 4 x DIGITAL OUTPUT : ADDR013 - ADDR016
     /// </summary>
     public class PLCSimulatorManager
     {
         private Dictionary<string, double> addressValues;
-        private object locker = new object();
+        private readonly object locker = new object();
         private Thread t1;
         private Thread t2;
 
@@ -39,12 +35,16 @@ namespace PLCSimulator
             addressValues.Add("ADDR008", 0);
 
             // DI
-            // TODO: dodati jos nekoliko adresa za DI (recimo po 4 za svaku vrstu tagova)
             addressValues.Add("ADDR009", 0);
+            addressValues.Add("ADDR010", 0);
+            addressValues.Add("ADDR011", 0);
+            addressValues.Add("ADDR012", 0);
 
             // DO
-            // TODO: dodati jos nekoliko adresa za DI (recimo po 4 za svaku vrstu tagova)
-            addressValues.Add("ADDR010", 0);
+            addressValues.Add("ADDR013", 0);
+            addressValues.Add("ADDR014", 0);
+            addressValues.Add("ADDR015", 0);
+            addressValues.Add("ADDR016", 0);
         }
 
         public void StartPLCSimulator()
@@ -80,14 +80,10 @@ namespace PLCSimulator
 
                 lock (locker)
                 {
-                    if (addressValues["ADDR009"] == 0)
-                    {
-                        addressValues["ADDR009"] = 1;
-                    }
-                    else
-                    {
-                        addressValues["ADDR009"] = 0;
-                    }
+                    addressValues["ADDR009"] = addressValues["ADDR009"] == 0 ? 1 : 0;
+                    addressValues["ADDR010"] = addressValues["ADDR010"] == 0 ? 1 : 0;
+                    addressValues["ADDR011"] = addressValues["ADDR011"] == 0 ? 1 : 0;
+                    addressValues["ADDR012"] = addressValues["ADDR012"] == 0 ? 1 : 0;
                 }
             }
         }
