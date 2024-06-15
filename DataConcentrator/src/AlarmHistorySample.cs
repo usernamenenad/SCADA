@@ -7,18 +7,21 @@ namespace DataConcentrator.src
     public class AlarmHistorySample
     {
         [Key]
-        public int Id { get; set; }
+        [Required]
+        public string Id { get; set; }
 
-        [ForeignKey("AlarmId")]
-        public int AlarmId { get; set; }
+        [Required]
+        public string AlarmId { get; set; }
 
+        [Required]
         public string VarName { get; set; }
 
         public string Message { get; set; }
 
+        [Required]
         public DateTime TimeStamp { get; set; }
 
-        public AlarmHistorySample(int alarmId, string varName, string message, DateTime timeStamp) 
+        public AlarmHistorySample(string alarmId, string varName, string message, DateTime timeStamp) 
         {
             AlarmId = alarmId;
             VarName = varName;

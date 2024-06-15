@@ -6,45 +6,95 @@ namespace PLCSimulator
     /// <summary>
     /// PLC Simulator
     /// 
-    /// 4 x ANALOG INPUT   : ADDR001 - ADDR004
-    /// 4 x ANALOG OUTPUT  : ADDR005 - ADDR008
-    /// 4 x DIGITAL INPUT  : ADDR009 - ADDR012
-    /// 4 x DIGITAL OUTPUT : ADDR013 - ADDR016
+    /// 16 x ANALOG INPUT   : ADDR001 - ADDR004
+    /// 16 x ANALOG OUTPUT  : ADDR005 - ADDR008
+    /// 16 x DIGITAL INPUT  : ADDR009 - ADDR012
+    /// 16 x DIGITAL OUTPUT : ADDR013 - ADDR016
     /// </summary>
     public class PLCSimulatorManager
     {
-        private Dictionary<string, double> addressValues;
+        public Dictionary<string, double> AnalogInputAddress = new Dictionary<string, double>();
+        public Dictionary<string, double> AnalogOutputAddress = new Dictionary<string, double>();
+        public Dictionary<string, double> DigitalInputAddress = new Dictionary<string, double>();
+        public Dictionary<string, double> DigitalOutputAddress = new Dictionary<string, double>();
+
         private readonly object locker = new object();
         private Thread t1;
         private Thread t2;
 
         public PLCSimulatorManager()
         {
-            addressValues = new Dictionary<string, double>();
-
             // AI
-            addressValues.Add("ADDR001", 0);
-            addressValues.Add("ADDR002", 0);
-            addressValues.Add("ADDR003", 0);
-            addressValues.Add("ADDR004", 0);
+            AnalogInputAddress.Add("ADDR000", 0);
+            AnalogInputAddress.Add("ADDR001", 0);
+            AnalogInputAddress.Add("ADDR002", 0);
+            AnalogInputAddress.Add("ADDR003", 0);
+            AnalogInputAddress.Add("ADDR004", 0);
+            AnalogInputAddress.Add("ADDR005", 0);
+            AnalogInputAddress.Add("ADDR006", 0);
+            AnalogInputAddress.Add("ADDR007", 0);
+            AnalogInputAddress.Add("ADDR008", 0);
+            AnalogInputAddress.Add("ADDR009", 0);
+            AnalogInputAddress.Add("ADDR010", 0);
+            AnalogInputAddress.Add("ADDR011", 0);
+            AnalogInputAddress.Add("ADDR012", 0);
+            AnalogInputAddress.Add("ADDR013", 0);
+            AnalogInputAddress.Add("ADDR014", 0);
+            AnalogInputAddress.Add("ADDR015", 0);
 
             // AO
-            addressValues.Add("ADDR005", 0);
-            addressValues.Add("ADDR006", 0);
-            addressValues.Add("ADDR007", 0);
-            addressValues.Add("ADDR008", 0);
+            AnalogOutputAddress.Add("ADDR016", 0);
+            AnalogOutputAddress.Add("ADDR017", 0);
+            AnalogOutputAddress.Add("ADDR018", 0);
+            AnalogOutputAddress.Add("ADDR019", 0);
+            AnalogOutputAddress.Add("ADDR020", 0);
+            AnalogOutputAddress.Add("ADDR021", 0);
+            AnalogOutputAddress.Add("ADDR022", 0);
+            AnalogOutputAddress.Add("ADDR023", 0);
+            AnalogOutputAddress.Add("ADDR024", 0);
+            AnalogOutputAddress.Add("ADDR025", 0);
+            AnalogOutputAddress.Add("ADDR026", 0);
+            AnalogOutputAddress.Add("ADDR027", 0);
+            AnalogOutputAddress.Add("ADDR028", 0);
+            AnalogOutputAddress.Add("ADDR029", 0);
+            AnalogOutputAddress.Add("ADDR030", 0);
+            AnalogOutputAddress.Add("ADDR031", 0);
 
             // DI
-            addressValues.Add("ADDR009", 0);
-            addressValues.Add("ADDR010", 0);
-            addressValues.Add("ADDR011", 0);
-            addressValues.Add("ADDR012", 0);
+            DigitalInputAddress.Add("ADDR032", 0);
+            DigitalInputAddress.Add("ADDR033", 0);
+            DigitalInputAddress.Add("ADDR034", 0);
+            DigitalInputAddress.Add("ADDR035", 0);
+            DigitalInputAddress.Add("ADDR036", 0);
+            DigitalInputAddress.Add("ADDR037", 0);
+            DigitalInputAddress.Add("ADDR038", 0);
+            DigitalInputAddress.Add("ADDR039", 0);
+            DigitalInputAddress.Add("ADDR040", 0);
+            DigitalInputAddress.Add("ADDR041", 0);
+            DigitalInputAddress.Add("ADDR042", 0);
+            DigitalInputAddress.Add("ADDR043", 0);
+            DigitalInputAddress.Add("ADDR044", 0);
+            DigitalInputAddress.Add("ADDR045", 0);
+            DigitalInputAddress.Add("ADDR046", 0);
+            DigitalInputAddress.Add("ADDR047", 0);
 
             // DO
-            addressValues.Add("ADDR013", 0);
-            addressValues.Add("ADDR014", 0);
-            addressValues.Add("ADDR015", 0);
-            addressValues.Add("ADDR016", 0);
+            DigitalOutputAddress.Add("ADDR048", 0);
+            DigitalOutputAddress.Add("ADDR049", 0);
+            DigitalOutputAddress.Add("ADDR050", 0);
+            DigitalOutputAddress.Add("ADDR051", 0);
+            DigitalOutputAddress.Add("ADDR052", 0);
+            DigitalOutputAddress.Add("ADDR053", 0);
+            DigitalOutputAddress.Add("ADDR054", 0);
+            DigitalOutputAddress.Add("ADDR055", 0);
+            DigitalOutputAddress.Add("ADDR056", 0);
+            DigitalOutputAddress.Add("ADDR057", 0);
+            DigitalOutputAddress.Add("ADDR058", 0);
+            DigitalOutputAddress.Add("ADDR059", 0);
+            DigitalOutputAddress.Add("ADDR060", 0);
+            DigitalOutputAddress.Add("ADDR061", 0);
+            DigitalOutputAddress.Add("ADDR062", 0);
+            DigitalOutputAddress.Add("ADDR063", 0);
         }
 
         public void StartPLCSimulator()
@@ -64,10 +114,10 @@ namespace PLCSimulator
 
                 lock (locker)
                 {
-                    addressValues["ADDR001"] = 100 * Math.Sin((double)DateTime.Now.Second / 60 * Math.PI); //SINE
-                    addressValues["ADDR002"] = 100 * DateTime.Now.Second / 60; //RAMP
-                    addressValues["ADDR003"] = 50 * Math.Cos((double)DateTime.Now.Second / 60 * Math.PI); //COS
-                    addressValues["ADDR004"] = RandomNumberBetween(0, 50);  //rand
+                    AnalogInputAddress["ADDR001"] = 100 * Math.Sin((double)DateTime.Now.Second / 60 * Math.PI); //SINE
+                    AnalogInputAddress["ADDR002"] = 100 * DateTime.Now.Second / 60; //RAMP
+                    AnalogInputAddress["ADDR003"] = 50 * Math.Cos((double)DateTime.Now.Second / 60 * Math.PI); //COS
+                    AnalogInputAddress["ADDR004"] = RandomNumberBetween(0, 50);  //rand
                 }
             }
         }
@@ -80,10 +130,10 @@ namespace PLCSimulator
 
                 lock (locker)
                 {
-                    addressValues["ADDR009"] = addressValues["ADDR009"] == 0 ? 1 : 0;
-                    addressValues["ADDR010"] = addressValues["ADDR010"] == 0 ? 1 : 0;
-                    addressValues["ADDR011"] = addressValues["ADDR011"] == 0 ? 1 : 0;
-                    addressValues["ADDR012"] = addressValues["ADDR012"] == 0 ? 1 : 0;
+                    DigitalInputAddress["ADDR009"] = DigitalInputAddress["ADDR009"] == 0 ? 1 : 0;
+                    DigitalInputAddress["ADDR010"] = DigitalInputAddress["ADDR010"] == 0 ? 1 : 0;
+                    DigitalInputAddress["ADDR011"] = DigitalInputAddress["ADDR011"] == 0 ? 1 : 0;
+                    DigitalInputAddress["ADDR012"] = DigitalInputAddress["ADDR012"] == 0 ? 1 : 0;
                 }
             }
         }
@@ -91,9 +141,9 @@ namespace PLCSimulator
         public double GetAnalogValue(string address)
         {
 
-            if (addressValues.ContainsKey(address))
+            if (AnalogInputAddress.ContainsKey(address))
             {
-                return addressValues[address];
+                return AnalogInputAddress[address];
             }
             else
             {
@@ -103,17 +153,17 @@ namespace PLCSimulator
 
         public void SetAnalogValue(string address, double value)
         {
-            if (addressValues.ContainsKey(address))
+            if (AnalogOutputAddress.ContainsKey(address))
             {
-                addressValues[address] = value;
+                AnalogOutputAddress[address] = value;
             }
         }
 
         public void SetDigitalValue(string address, double value)
         {
-            if (addressValues.ContainsKey(address))
+            if (DigitalInputAddress.ContainsKey(address))
             {
-                addressValues[address] = value;
+                DigitalInputAddress[address] = value;
             }
         }
 

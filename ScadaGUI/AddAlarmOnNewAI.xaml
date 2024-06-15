@@ -1,0 +1,275 @@
+﻿<Window x:Class="ScadaGUI.AddAlarmOnNewAI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:ScadaGUI"
+        mc:Ignorable="d"
+        Title="Dodaj alarm" 
+        Height="550" 
+        Width="750"
+        ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="5*"/>
+            <RowDefinition Height="0.7*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+            <Border>
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0, 0" 
+                                         EndPoint="1, 1">
+                        <GradientStop Color="#eeeee4" Offset="0.5"/>
+                        <GradientStop Color="#abdbe3" Offset="0.3"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Image Source="./pics/alert.png"
+                   Width="100"
+                   Height="100"/>
+            </Border>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <materialDesign:Card Margin="5">
+                    <UniformGrid Columns="1" Margin="5">
+                        <UniformGrid.Resources>
+                            <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+                        </UniformGrid.Resources>
+                        <CheckBox Name="LowestAlarmCheckBox"
+                                  Margin="0 20 0 0">Najniži alarm</CheckBox>
+                        <StackPanel>
+                            <TextBlock Text="ID alarma"/>
+                            <TextBox Name="LowestAlarmId"
+                                     IsEnabled="{Binding ElementName=LowestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Ime alarma"/>
+                            <TextBox Name="LowestAlarmName"
+                                     IsEnabled="{Binding ElementName=LowestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Opis alarma"/>
+                            <TextBox Name="LowestAlarmDescription"
+                                     IsEnabled="{Binding ElementName=LowestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Alarm aktivan"/>
+                            <ComboBox Name="LowestAlarmIsActive"
+                                      IsEnabled="{Binding ElementName=LowestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Vrijednost aktivacije"/>
+                            <TextBox Name="LowestAlarmActivationValue"
+                                     IsEnabled="{Binding ElementName=LowestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Aktivira se na"/>
+                            <ComboBox Name="LowestAlarmActivatesAt"
+                                     IsEnabled="{Binding ElementName=LowestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </materialDesign:Card>
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <materialDesign:Card Margin="5">
+                    <UniformGrid Columns="1" Margin="5">
+                        <UniformGrid.Resources>
+                            <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+                        </UniformGrid.Resources>
+                        <CheckBox Name="LowAlarmCheckBox"
+                                  Margin="0 20 0 0">Nizak alarm</CheckBox>
+                        <StackPanel>
+                            <TextBlock Text="ID alarma"/>
+                            <TextBox Name="LowAlarmId"
+                                     IsEnabled="{Binding ElementName=LowAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Ime alarma"/>
+                            <TextBox Name="LowAlarmName"
+                                     IsEnabled="{Binding ElementName=LowAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Opis alarma"/>
+                            <TextBox Name="LowAlarmDescription"
+                                     IsEnabled="{Binding ElementName=LowAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Alarm aktivan"/>
+                            <ComboBox Name="LowAlarmIsActive"
+                                      IsEnabled="{Binding ElementName=LowAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Vrijednost aktivacije"/>
+                            <TextBox Name="LowAlarmActivationValue"
+                                     IsEnabled="{Binding ElementName=LowAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Aktivira se na"/>
+                            <ComboBox Name="LowAlarmActivatesAt"
+                                     IsEnabled="{Binding ElementName=LowAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </materialDesign:Card>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <materialDesign:Card Margin="5">
+                    <UniformGrid Columns="1" Margin="5">
+                        <UniformGrid.Resources>
+                            <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+                        </UniformGrid.Resources>
+                        <CheckBox Name="MediumAlarmCheckBox"
+                                  Margin="0 20 0 0">Srednji alarm</CheckBox>
+                        <StackPanel>
+                            <TextBlock Text="ID alarma"/>
+                            <TextBox Name="MediumAlarmId"
+                                    IsEnabled="{Binding ElementName=MediumAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Ime alarma"/>
+                            <TextBox Name="MediumAlarmName"
+                                     IsEnabled="{Binding ElementName=MediumAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Opis alarma"/>
+                            <TextBox Name="MediumAlarmDescription"
+                                     IsEnabled="{Binding ElementName=MediumAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Alarm aktivan"/>
+                            <ComboBox Name="MediumAlarmIsActive"
+                                      IsEnabled="{Binding ElementName=MediumAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Vrijednost aktivacije"/>
+                            <TextBox Name="MediumAlarmActivationValue"
+                                     IsEnabled="{Binding ElementName=MediumAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Aktivira se na"/>
+                            <ComboBox Name="MediumAlarmActivatesAt"
+                                     IsEnabled="{Binding ElementName=MediumAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </materialDesign:Card>
+            </Grid>
+
+            <Grid Grid.Column="3">
+                <materialDesign:Card Margin="5">
+                    <UniformGrid Columns="1" Margin="5">
+                        <UniformGrid.Resources>
+                            <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+                        </UniformGrid.Resources>
+                        <CheckBox Name="HighAlarmCheckBox"
+                                  Margin="0 20 0 0">Visok alarm</CheckBox>
+                        <StackPanel>
+                            <TextBlock Text="ID alarma"/>
+                            <TextBox Name="HighAlarmId"
+                                    IsEnabled="{Binding ElementName=HighAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Ime alarma"/>
+                            <TextBox Name="HighAlarmName"
+                                     IsEnabled="{Binding ElementName=HighAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Opis alarma"/>
+                            <TextBox Name="HighAlarmDescription"
+                                     IsEnabled="{Binding ElementName=HighAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Alarm aktivan"/>
+                            <ComboBox Name="HighAlarmIsActive"
+                                      IsEnabled="{Binding ElementName=HighAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Vrijednost aktivacije"/>
+                            <TextBox Name="HighAlarmActivationValue"
+                                     IsEnabled="{Binding ElementName=HighAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Aktivira se na"/>
+                            <ComboBox Name="HighAlarmActivatesAt"
+                                     IsEnabled="{Binding ElementName=HighAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </materialDesign:Card>
+            </Grid>
+
+            <Grid Grid.Column="4">
+                <materialDesign:Card Margin="5">
+                    <UniformGrid Columns="1" Margin="5">
+                        <UniformGrid.Resources>
+                            <BooleanToVisibilityConverter x:Key="BooleanToVisibility"/>
+                        </UniformGrid.Resources>
+                        <CheckBox Name="HighestAlarmCheckBox"
+                                  Margin="0 20 0 0">Najviši alarm</CheckBox>
+                        <StackPanel>
+                            <TextBlock Text="ID alarma"/>
+                            <TextBox Name="HighestAlarmId"
+                                    IsEnabled="{Binding ElementName=HighestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Ime alarma"/>
+                            <TextBox Name="HighestAlarmName"
+                                     IsEnabled="{Binding ElementName=HighestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Opis alarma"/>
+                            <TextBox Name="HighestAlarmDescription"
+                                     IsEnabled="{Binding ElementName=HighestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Alarm aktivan"/>
+                            <ComboBox Name="HighestAlarmIsActive"
+                                      IsEnabled="{Binding ElementName=HighestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Vrijednost aktivacije"/>
+                            <TextBox Name="HighestAlarmActivationValue"
+                                     IsEnabled="{Binding ElementName=HighestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Text="Aktivira se na"/>
+                            <ComboBox Name="HighestAlarmActivatesAt"
+                                     IsEnabled="{Binding ElementName=HighestAlarmCheckBox, Path=IsChecked}"/>
+                        </StackPanel>
+                    </UniformGrid>
+                </materialDesign:Card>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <StackPanel Orientation="Horizontal"
+                        HorizontalAlignment="Right">
+                <StackPanel.Resources>
+                    <Style x:Key="Button1"
+                               BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}"
+                               TargetType="Button">
+                        <Setter Property="Margin" Value="5"/>
+                        <Setter Property="Background" Value="AliceBlue"/>
+                        <Setter Property="Foreground" Value="Black"/>
+                        <Setter Property="BorderBrush" Value="#abdbe3"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Button Style="{StaticResource Button1}">Otkaži</Button>
+                <Button Style="{StaticResource Button1}"
+                        Click="Save">Potvrdi</Button>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>

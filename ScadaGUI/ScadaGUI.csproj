@@ -74,10 +74,52 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="AddAlarm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAlarmOnNewAI.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAnalogInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddAnalogOutput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddDigitalInput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddDigitalOutput.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="AddAlarm.xaml.cs">
+      <DependentUpon>AddAlarm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAlarmOnNewAI.xaml.cs">
+      <DependentUpon>AddAlarmOnNewAI.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAnalogInput.xaml.cs">
+      <DependentUpon>AddAnalogInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddAnalogOutput.xaml.cs">
+      <DependentUpon>AddAnalogOutput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddDigitalInput.xaml.cs">
+      <DependentUpon>AddDigitalInput.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="AddDigitalOutput.xaml.cs">
+      <DependentUpon>AddDigitalOutput.xaml</DependentUpon>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -113,6 +155,28 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DataConcentrator\DataConcentrator.csproj">
+      <Project>{024884f0-496f-4426-a0ce-45ff39ae24a6}</Project>
+      <Name>DataConcentrator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PLCSimulator\PLCSimulator.csproj">
+      <Project>{dc33bd88-1c29-4d05-8bb6-c41323290719}</Project>
+      <Name>PLCSimulator</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pics\analog.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pics\gear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pics\binary.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pics\alert.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

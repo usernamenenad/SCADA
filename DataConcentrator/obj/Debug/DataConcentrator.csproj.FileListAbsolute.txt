@@ -1,0 +1,17 @@
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\DataConcentrator.dll.config
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\DataConcentrator.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\DataConcentrator.pdb
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\EntityFramework.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\EntityFramework.xml
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConcentrator.csproj.AssemblyReference.cache
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConcentrator.csproj.CoreCompileInputs.cache
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConc.AF26BFFF.Up2Date
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConcentrator.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConcentrator.pdb
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\PLCSimulator.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\PLCSimulator.pdb
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\PLCSimulator.dll.config
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConcentrator.Migrations.Init.resources
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConcentrator.csproj.GenerateResource.cache

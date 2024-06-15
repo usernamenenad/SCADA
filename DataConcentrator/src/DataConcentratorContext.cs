@@ -9,7 +9,7 @@ namespace DataConcentrator.src
         public DbSet<DigitalInput> DigitalInputs { get; set; }
         public DbSet<DigitalOutput> DigitalOutputs { get; set; }
         public DbSet<Alarm> Alarms { get; set; }
-        public DbSet<AlarmHistorySample> AlarmHistory {  get; set; }
+        public DbSet<AlarmHistorySample> AlarmHistory { get; set; }
 
         // Singleton principle
         private static DataConcentratorContext instance;
