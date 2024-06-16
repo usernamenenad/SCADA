@@ -1,12 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Threading;
 
 namespace DataConcentrator.src
 {
-    public class AnalogInput : Input
+    public class AnalogInput : Input, INotifyPropertyChanged
     {
-        [Required]
-        public double Value { get; set; }
+        private double _value;
+        [NotMapped]
+        public double Value
+        {
+            get => _value;
+            set
+            {
+                _value = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Value)));
+            }
+        }
 
         [Required]
         public double LowLimit { get; set; }
@@ -19,5 +32,21 @@ namespace DataConcentrator.src
 
         [Required]
         public List<Alarm> Alarms { get; set; } = new List<Alarm>();
+
+        public Thread Scanner;
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        public void Scan(PLCManager Manager)
+        {
+            while(true)
+            {
+                if(OnOffScan)
+                {
+                    Value = Manager.SimulatorManager.GetAnalogValue(Address);
+                }
+                Thread.Sleep((int)(ScanTime * 1000));
+            }
+        }
     }
 }

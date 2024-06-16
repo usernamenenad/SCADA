@@ -24,6 +24,8 @@ namespace ScadaGUI
         public string TagId { get; set; }
         public string TagName { get; set; }
         public List<Alarm> AnalogInputAlarms { get; set; }
+        public List<AlarmPriority> ExistingAlarms { get; set; } = new List<AlarmPriority>();
+        public List<Alarm> AlarmsToRemove { get; set; } = new List<Alarm>();
         public static Dictionary<string, AlarmPriority> PriorityMap { get; set; } = new Dictionary<string, AlarmPriority>()
         {
             {"Najniži", AlarmPriority.Lowest },
@@ -37,13 +39,17 @@ namespace ScadaGUI
             {"Uzlazna ivica", AlarmActivationEdge.Rising },
             {"Silazna ivica", AlarmActivationEdge.Falling },
         };
-        public AddAlarmOnNewAI(string tagId, string tagName, double LowLimitValue, double HighLimitValue, List<Alarm> analogInputAlarms)
+        public AddAlarmOnNewAI(string tagId, string tagName, double LowLimitValue, double HighLimitValue, List<Alarm> analogInputAlarms, List<Alarm> alarmsToRemove)
         {
             InitializeComponent();
 
             List<string> EdgeValues = EdgeMap.Keys.ToList();
             List<string> IsActiveValues = new List<string>() { "Aktivan", "Neaktivan" };
 
+            if(analogInputAlarms.Any())
+            {
+                FillAlarms(analogInputAlarms);
+            }
 
             LowestAlarmActivatesAt.ItemsSource = EdgeValues;
             LowAlarmActivatesAt.ItemsSource = EdgeValues;
@@ -63,8 +69,8 @@ namespace ScadaGUI
             LowLimit = LowLimitValue;
             HighLimit = HighLimitValue;
             AnalogInputAlarms = analogInputAlarms;
+            AlarmsToRemove = alarmsToRemove;
         }
-
         public void Save(object sender, RoutedEventArgs e)
         {
             if(!ValidateInputs(out string errorMessage))
@@ -75,6 +81,67 @@ namespace ScadaGUI
             MessageBox.Show("Uspješno dodat alarm!");
             Close();
         }
+        public void FillAlarms(List<Alarm> alarms)
+        {
+            foreach (Alarm alarm in alarms)
+            {
+                ExistingAlarms.Add(alarm.Priority);
+
+                switch(alarm.Priority)
+                {
+                    case AlarmPriority.Lowest:
+                        LowestAlarmCheckBox.IsChecked = true;
+                        LowestAlarmId.Text = alarm.Id;
+                        LowestAlarmName.Text = alarm.Name;
+                        LowestAlarmDescription.Text = alarm.Description;
+                        LowestAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
+                        LowestAlarmActivationValue.Text = alarm.ActivationValue.ToString();
+                        LowestAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
+                        break;
+
+                    case AlarmPriority.Low:
+                        LowAlarmCheckBox.IsChecked = true;
+                        LowAlarmId.Text = alarm.Id;
+                        LowAlarmName.Text = alarm.Name;
+                        LowAlarmDescription.Text = alarm.Description;
+                        LowAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
+                        LowAlarmActivationValue.Text = alarm.ActivationValue.ToString();
+                        LowAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
+                        break;
+
+                    case AlarmPriority.Medium:
+                        MediumAlarmCheckBox.IsChecked = true;
+                        MediumAlarmId.Text = alarm.Id;
+                        MediumAlarmName.Text = alarm.Name;
+                        MediumAlarmDescription.Text = alarm.Description;
+                        MediumAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
+                        MediumAlarmActivationValue.Text = alarm.ActivationValue.ToString();
+                        MediumAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
+                        break;
+
+                    case AlarmPriority.High:
+                        HighAlarmCheckBox.IsChecked = true;
+                        HighAlarmId.Text = alarm.Id;
+                        HighAlarmName.Text = alarm.Name;
+                        HighAlarmDescription.Text = alarm.Description;
+                        HighAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
+                        HighAlarmActivationValue.Text = alarm.ActivationValue.ToString();
+                        HighAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
+                        break;
+
+                    case AlarmPriority.Highest:
+                        HighestAlarmCheckBox.IsChecked = true;
+                        HighestAlarmId.Text = alarm.Id;
+                        HighestAlarmName.Text = alarm.Name;
+                        HighestAlarmDescription.Text = alarm.Description;
+                        HighestAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
+                        HighestAlarmActivationValue.Text = alarm.ActivationValue.ToString();
+                        HighestAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
+                        break;
+                }
+            }
+        }
+
         public bool ValidateInputs(out string errorMessage)
         {
             List<AlarmGUIItem> alarmGUIItems = new List<AlarmGUIItem>();
@@ -146,18 +213,42 @@ namespace ScadaGUI
                 }
                 if(alarmGUIItem.CheckBox.IsChecked == true)
                 {
-                    AnalogInputAlarms.Add(new Alarm()
+                    if (ExistingAlarms.Contains(PriorityMap[alarmGUIItem.Type]))
                     {
-                        Id = alarmGUIItem.Id.Text,
-                        Name = alarmGUIItem.Name.Text,
-                        Description = alarmGUIItem.Description.Text,
-                        IsActive = alarmGUIItem.IsActive.Text == "Aktivan",
-                        ActivationValue = double.Parse(alarmGUIItem.ActivationValue.Text),
-                        ActivationEdge = EdgeMap[alarmGUIItem.ActivatesAt.Text],
-                        Priority = PriorityMap[alarmGUIItem.Type],
-                        AnalogInputId = TagId,
-                        AnalogInputName = TagName,
-                    });
+                        Alarm existingAlarm = AnalogInputAlarms.First(alarm => alarm.Priority == PriorityMap[alarmGUIItem.Type]);
+                        existingAlarm.Id = alarmGUIItem.Id.Text;
+                        existingAlarm.Name = alarmGUIItem.Name.Text;
+                        existingAlarm.Description = alarmGUIItem.Description.Text;
+                        existingAlarm.IsActive = alarmGUIItem.IsActive.Text == "Aktivan";
+                        existingAlarm.ActivationValue = double.Parse(alarmGUIItem.ActivationValue.Text);
+                        existingAlarm.ActivationEdge = EdgeMap[alarmGUIItem.ActivatesAt.Text];
+                        existingAlarm.Priority = PriorityMap[alarmGUIItem.Type];
+                        existingAlarm.AnalogInputId = TagId;
+                        existingAlarm.AnalogInputName = TagName;
+                    }
+                    else
+                    {
+                        AnalogInputAlarms.Add(new Alarm()
+                        {
+                            Id = alarmGUIItem.Id.Text,
+                            Name = alarmGUIItem.Name.Text,
+                            Description = alarmGUIItem.Description.Text,
+                            IsActive = alarmGUIItem.IsActive.Text == "Aktivan",
+                            ActivationValue = double.Parse(alarmGUIItem.ActivationValue.Text),
+                            ActivationEdge = EdgeMap[alarmGUIItem.ActivatesAt.Text],
+                            Priority = PriorityMap[alarmGUIItem.Type],
+                            AnalogInputId = TagId,
+                            AnalogInputName = TagName,
+                        });
+                    }
+                }
+                else
+                {
+                    if(ExistingAlarms.Contains(PriorityMap[alarmGUIItem.Type]))
+                    {
+                        Alarm existingAlarm = AnalogInputAlarms.First(alarm => alarm.Priority == PriorityMap[alarmGUIItem.Type]);
+                        AlarmsToRemove.Add(existingAlarm);
+                    }
                 }
             }
             return true;

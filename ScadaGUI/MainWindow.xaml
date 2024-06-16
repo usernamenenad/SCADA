@@ -16,7 +16,8 @@
         TextElement.FontSize="13"
         TextOptions.TextFormattingMode="Ideal"
         TextOptions.TextRenderingMode="Auto"
-        SnapsToDevicePixels="True">
+        SnapsToDevicePixels="True"
+        Closing="Window_Closing">
     <Grid>
         <Grid.Resources>
             <Style TargetType="DataGrid">
@@ -163,29 +164,42 @@
 
                     <materialDesign:Card Margin="5">
                         <DataGrid x:Name="AnalogInputsList">
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="EditAnalogInput"/>
+                                </Style>
+                            </DataGrid.Resources>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Adresa" Binding="{Binding Address}" Width="*"/>
+                                <DataGridTextColumn Header="Vrijednost" Binding="{Binding Value}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </materialDesign:Card>
                     <materialDesign:Card Margin="5">
                         <DataGrid x:Name="AnalogOutputsList">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Adresa" Binding="{Binding Address}" Width="*"/>
+                                <DataGridTextColumn Header="Vrijednost" Binding="{Binding Value}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </materialDesign:Card>
                     <materialDesign:Card Margin="5">
                         <DataGrid x:Name="DigitalInputsList">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Adresa" Binding="{Binding Address}" Width="*"/>
+                                <DataGridTextColumn Header="Vrijednost" Binding="{Binding Value}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </materialDesign:Card>
                     <materialDesign:Card Margin="5">
                         <DataGrid x:Name="DigitalOutputsList">
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
+                                <DataGridTextColumn Header="Adresa" Binding="{Binding Address}" Width="*"/>
+                                <DataGridTextColumn Header="Vrijednost" Binding="{Binding Value}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </materialDesign:Card>

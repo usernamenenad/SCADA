@@ -42,7 +42,6 @@
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Value = c.Double(nullable: false),
                         LowLimit = c.Double(nullable: false),
                         HighLimit = c.Double(nullable: false),
                         Units = c.String(nullable: false),
@@ -59,7 +58,6 @@
                 c => new
                     {
                         Id = c.String(nullable: false, maxLength: 128),
-                        Value = c.Double(nullable: false),
                         LowLimit = c.Double(nullable: false),
                         HighLimit = c.Double(nullable: false),
                         Units = c.String(nullable: false),

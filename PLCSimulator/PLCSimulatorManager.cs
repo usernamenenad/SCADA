@@ -114,10 +114,10 @@ namespace PLCSimulator
 
                 lock (locker)
                 {
-                    AnalogInputAddress["ADDR001"] = 100 * Math.Sin((double)DateTime.Now.Second / 60 * Math.PI); //SINE
-                    AnalogInputAddress["ADDR002"] = 100 * DateTime.Now.Second / 60; //RAMP
-                    AnalogInputAddress["ADDR003"] = 50 * Math.Cos((double)DateTime.Now.Second / 60 * Math.PI); //COS
-                    AnalogInputAddress["ADDR004"] = RandomNumberBetween(0, 50);  //rand
+                    AnalogInputAddress["ADDR000"] = 100 * Math.Sin((double)DateTime.Now.Second / 60 * Math.PI); //SINE
+                    AnalogInputAddress["ADDR001"] = 100 * DateTime.Now.Second / 60; //RAMP
+                    AnalogInputAddress["ADDR002"] = 50 * Math.Cos((double)DateTime.Now.Second / 60 * Math.PI); //COS
+                    AnalogInputAddress["ADDR003"] = RandomNumberBetween(0, 50);  //rand
                 }
             }
         }
@@ -130,10 +130,10 @@ namespace PLCSimulator
 
                 lock (locker)
                 {
-                    DigitalInputAddress["ADDR009"] = DigitalInputAddress["ADDR009"] == 0 ? 1 : 0;
-                    DigitalInputAddress["ADDR010"] = DigitalInputAddress["ADDR010"] == 0 ? 1 : 0;
-                    DigitalInputAddress["ADDR011"] = DigitalInputAddress["ADDR011"] == 0 ? 1 : 0;
-                    DigitalInputAddress["ADDR012"] = DigitalInputAddress["ADDR012"] == 0 ? 1 : 0;
+                    DigitalInputAddress["ADDR032"] = DigitalInputAddress["ADDR032"] == 0 ? 1 : 0;
+                    DigitalInputAddress["ADDR033"] = DigitalInputAddress["ADDR033"] == 0 ? 1 : 0;
+                    DigitalInputAddress["ADDR034"] = DigitalInputAddress["ADDR034"] == 0 ? 1 : 0;
+                    DigitalInputAddress["ADDR035"] = DigitalInputAddress["ADDR035"] == 0 ? 1 : 0;
                 }
             }
         }

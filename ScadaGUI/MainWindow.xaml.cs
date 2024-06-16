@@ -1,7 +1,14 @@
-﻿using System.Linq;
+﻿using System;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Collections.Generic;
 using System.Windows;
 using DataConcentrator;
 using DataConcentrator.src;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace ScadaGUI
 {
@@ -28,11 +35,14 @@ namespace ScadaGUI
             DigitalInputsList.ItemsSource = Context.DigitalInputs.ToList();
             DigitalOutputsList.ItemsSource = Context.DigitalOutputs.ToList();
 
-            AlarmList.ItemsSource = Context.Alarms.ToList();    
+            AlarmList.ItemsSource = Context.Alarms.ToList();
+
+            Manager.SimulatorManager.StartPLCSimulator();
+            StartScanning();
         }
         private void AddAnalogInput(object sender, RoutedEventArgs e)
         {
-            AddAnalogInput addAnalogInput = new AddAnalogInput(Manager, AnalogInputsList)
+            AddAnalogInput addAnalogInput = new AddAnalogInput(Manager, AnalogInputsList, AlarmList)
             {
                 Owner = this
             };
@@ -69,6 +79,44 @@ namespace ScadaGUI
                 Owner = this
             };
             addAlarm.Show();
+        }
+
+        // Double click on grid row event handlers
+        private void EditAnalogInput(object sender, MouseButtonEventArgs e)
+        {
+            AnalogInput analogInput = (sender as DataGridRow)?.DataContext as AnalogInput;
+            EditAnalogInput editAnalogInput = new EditAnalogInput(analogInput, Manager, AnalogInputsList, AlarmList)
+            {
+                Owner = this
+            };
+            editAnalogInput.Show();
+        }
+
+        public void StartScanning()
+        {
+            foreach(var analogInput in Context.AnalogInputs.ToList())
+            {
+                analogInput.PropertyChanged += UpdateDataGrid;
+                analogInput.Scanner = new Thread(() => analogInput.Scan(Manager));
+                analogInput.Scanner.Start();
+            }
+        }
+        public void UpdateDataGrid(object sender, PropertyChangedEventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AnalogInputsList.ItemsSource = Context.AnalogInputs.ToList();
+            });
+        }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            foreach (var analogInput in Context.AnalogInputs.ToList())
+            {
+                analogInput.Scanner.Abort();
+                analogInput.PropertyChanged -= UpdateDataGrid;
+            }
+            Manager.SimulatorManager.Abort();
         }
     }
 }

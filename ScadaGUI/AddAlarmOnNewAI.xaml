@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ScadaGUI"
         mc:Ignorable="d"
-        Title="Dodaj alarm" 
+        Title="Uredi alarme" 
         Height="550" 
         Width="750"
         ResizeMode="NoResize">

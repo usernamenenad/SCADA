@@ -1,4 +1,4 @@
-﻿<Window x:Class="ScadaGUI.AddAnalogInput"
+﻿<Window x:Class="ScadaGUI.EditAnalogInput"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ScadaGUI"
         mc:Ignorable="d"
-        Title="Dodaj analogni ulaz" 
+        Title="Uredi analogni ulaz" 
         Height="650" 
         Width="800"
         ResizeMode="NoResize">
@@ -37,17 +37,17 @@
 
             <Grid Grid.Row="0">
                 <Image Source="./pics/analog.png"
-                       Width="150"
-                       Height="150"
-                       Margin="5"/>
+                Width="150"
+                Height="150"
+                Margin="5"/>
             </Grid>
 
             <Grid Grid.Row="2">
                 <UniformGrid Columns="1">
                     <UniformGrid.Resources>
                         <Style x:Key="Button1"
-                               BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}"
-                               TargetType="Button">
+                        BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        TargetType="Button">
                             <Setter Property="Margin" Value="20"/>
                             <Setter Property="Background" Value="AliceBlue"/>
                             <Setter Property="Foreground" Value="Black"/>
@@ -55,9 +55,11 @@
                         </Style>
                     </UniformGrid.Resources>
                     <Button Style="{StaticResource Button1}"
-                            Click="Save">Potvrdi</Button>
+                     Click="Save">Potvrdi</Button>
                     <Button Style="{StaticResource Button1}"
-                            Click="Cancel">Otkaži</Button>
+                     Click="Delete">Obriši</Button>
+                    <Button Style="{StaticResource Button1}"
+                     Click="Cancel">Otkaži</Button>
                 </UniformGrid>
             </Grid>
 
@@ -70,12 +72,12 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock Text="Dodaj analogni ulaz"
-                           Margin="20 0 0 0"
-                           FontSize="30"
-                           FontWeight="DemiBold"
-                           HorizontalAlignment="Left"
-                           VerticalAlignment="Center"/>
+                <TextBlock Text="Uredi analogni ulaz"
+                   Margin="20 0 0 0"
+                   FontSize="30"
+                   FontWeight="DemiBold"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center"/>
             </Grid>
 
             <Grid Grid.Row="1">
@@ -85,73 +87,73 @@
                         <StackPanel>
                             <TextBlock Text="Tag"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="50"
-                                     x:Name="Tag"/>
+                             MaxLength="50"
+                             x:Name="Tag"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Ime"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="50"
-                                     x:Name="Name"/>
+                             MaxLength="50"
+                             x:Name="Name"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Opis"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"
-                                     x:Name="Description"/>
+                             MaxLength="100"
+                             x:Name="Description"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="I/0 adresa"/>
                             <ComboBox Margin="0 5 0 0"
-                                      x:Name="Address"/>
+                              x:Name="Address"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Vrijeme skeniranja"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"
-                                     x:Name="ScanTime"/>
+                             MaxLength="100"
+                             x:Name="ScanTime"/>
                         </StackPanel>
-                        
+
                         <StackPanel>
                             <TextBlock Text="ON/OFF skeniranje"/>
                             <ComboBox Margin="0 5 0 0"
-                                      x:Name="OnOffScan"/>
+                              x:Name="OnOffScan"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Gornja granica"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"
-                                     x:Name="HighLimit"/>
+                             MaxLength="100"
+                             x:Name="HighLimit"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Donja granica"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"
-                                     x:Name="LowLimit"/>
+                             MaxLength="100"
+                             x:Name="LowLimit"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Jedinica"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"
-                                     x:Name="Unit"/>
+                             MaxLength="100"
+                             x:Name="Unit"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Alarmi"/>
                             <UniformGrid Rows="1"
-                                         VerticalAlignment="Center"
-                                         HorizontalAlignment="Left">
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Left">
                                 <UniformGrid.Resources>
                                     <Style x:Key="Button1"
-                                           BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}"
-                                           TargetType="Button">
+                                   BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}"
+                                   TargetType="Button">
                                         <Setter Property="Margin" Value="0 2 0 0 "/>
                                         <Setter Property="Background" Value="AliceBlue"/>
                                         <Setter Property="Foreground" Value="Black"/>
@@ -159,7 +161,7 @@
                                     </Style>
                                 </UniformGrid.Resources>
                                 <Button Style="{StaticResource Button1}"
-                                        Click="AddAnalogInputAlarm">Uredi alarme</Button>
+                                Click="AddAnalogInputAlarm">Uredi alarme</Button>
                             </UniformGrid>
                         </StackPanel>
 
@@ -169,6 +171,6 @@
             </Grid>
 
         </Grid>
-        
+
     </Grid>
 </Window>
