@@ -38,9 +38,11 @@ namespace ScadaGUI
             Name.Text = analogInput.Name;
             Description.Text = analogInput.Description;
 
-            Manager.AvailibleAnalogInputs.Add(analogInput.Address);
-            Manager.AvailibleAnalogInputs.Sort();
-            Address.ItemsSource = Manager.AvailibleAnalogInputs;
+            List<string> AddressDisplay = new List<string>(Manager.AvailibleAnalogInputs);
+            AddressDisplay.Add(analogInput.Address);
+            AddressDisplay.Sort();
+
+            Address.ItemsSource = AddressDisplay;
             Address.SelectedItem = analogInput.Address;
 
             ScanTime.Text = analogInput.ScanTime.ToString();
@@ -50,7 +52,7 @@ namespace ScadaGUI
 
             LowLimit.Text = analogInput.LowLimit.ToString();
             HighLimit.Text = analogInput.HighLimit.ToString();
-            Unit.Text = analogInput.Units;
+            Units.Text = analogInput.Units;
         }
         private void Save(object sender, RoutedEventArgs e)
         {
@@ -60,15 +62,19 @@ namespace ScadaGUI
                 return;
             }
 
-            AnalogInput.Id = Tag.Text;
             AnalogInput.Name = Name.Text;
             AnalogInput.Description = Description.Text;
+
+            string OldAddress = AnalogInput.Address;
             AnalogInput.Address = Address.Text;
+
             AnalogInput.ScanTime = double.Parse(ScanTime.Text);
             AnalogInput.OnOffScan = OnOffScan.Text == "Uključi";
+
             AnalogInput.HighLimit = double.Parse(HighLimit.Text);
             AnalogInput.LowLimit = double.Parse(LowLimit.Text);
-            AnalogInput.Units = Unit.Text;
+
+            AnalogInput.Units = Units.Text;
 
             foreach (var alarm in AlarmsToRemove)
             {
@@ -90,28 +96,35 @@ namespace ScadaGUI
                 }
                 return;
             }
+
             AnalogInputsList.ItemsSource = Context.AnalogInputs.ToList();
             AlarmList.ItemsSource = Context.Alarms.ToList();
+
+            Manager.FreeAnalogInput(OldAddress);
             Manager.TakeAnalogInput(Address.Text);
 
-            MessageBox.Show("Uspješno izmjenjen analogni ulaz!", "Uredi analogni ulaz", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Uspješno uređen analogni ulaz!", "Uredi analogni ulaz", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            Close();
         }
         private void Delete(object sender, RoutedEventArgs e) 
         {
-            var result = MessageBox.Show("Da li ste sigurni da želite obrisati analognu veličinu?", "Upozorenje", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            var result = MessageBox.Show("Da li ste sigurni da želite obrisati analogni ulaz?", "Upozorenje", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
             if (result == MessageBoxResult.Yes)
             {
-                foreach (var alarm in AlarmsToRemove)
-                {
-                    Context.Alarms.Remove(alarm);
-                }
-                Manager.FreeAnalogInput(AnalogInput.Address);
-                AnalogInput.Scanner.Abort();
-                Context.AnalogInputs.Remove(AnalogInput);
-
                 try
                 {
+                    foreach (var alarm in AlarmsToRemove)
+                    {
+                        Context.Alarms.Remove(alarm);
+                    }
+
+                    AnalogInput.Scanner.Abort();
+                    Context.AnalogInputs.Remove(AnalogInput);
                     Context.SaveChanges();
+
+
+                    Manager.FreeAnalogInput(AnalogInput.Address);
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -127,6 +140,8 @@ namespace ScadaGUI
 
                 AnalogInputsList.ItemsSource = Context.AnalogInputs.ToList();
                 AlarmList.ItemsSource = Context.Alarms.ToList();
+
+                Close();
             }
         }
         private void Cancel(object sender, RoutedEventArgs e) 
@@ -259,7 +274,7 @@ namespace ScadaGUI
             }
 
             // Is the unit written
-            if (string.IsNullOrEmpty(Unit.Text) || double.TryParse(Unit.Text, out _))
+            if (string.IsNullOrEmpty(Units.Text) || double.TryParse(Units.Text, out _))
             {
                 errorMessage += "Nepravilna jedinica!";
                 return true;

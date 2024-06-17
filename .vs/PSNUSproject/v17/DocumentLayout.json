@@ -7,16 +7,8 @@
       "RelativeMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|solutionrelative:scadagui\\editanaloginput.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\scadagui\\editanaloginput.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|solutionrelative:scadagui\\editanaloginput.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\scadagui\\addanaloginput.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|solutionrelative:scadagui\\addanaloginput.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{024884F0-496F-4426-A0CE-45FF39AE24A6}|DataConcentrator\\DataConcentrator.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\dataconcentrator\\plcmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{024884F0-496F-4426-A0CE-45FF39AE24A6}|DataConcentrator\\DataConcentrator.csproj|solutionrelative:dataconcentrator\\plcmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\scadagui\\editanalogoutput.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "RelativeMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|solutionrelative:scadagui\\editanalogoutput.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,37 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AddAnalogInput.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\AddAnalogInput.xaml.cs",
-              "RelativeDocumentMoniker": "ScadaGUI\\AddAnalogInput.xaml.cs",
-              "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\AddAnalogInput.xaml.cs",
-              "RelativeToolTip": "ScadaGUI\\AddAnalogInput.xaml.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAiwC0AAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T17:39:28.424Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "PLCManager.cs",
-              "DocumentMoniker": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\DataConcentrator\\PLCManager.cs",
-              "RelativeDocumentMoniker": "DataConcentrator\\PLCManager.cs",
-              "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\DataConcentrator\\PLCManager.cs",
-              "RelativeToolTip": "DataConcentrator\\PLCManager.cs",
-              "ViewState": "AQIAAAcAAAAAAAAAAADwvxwAAAAJAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T17:35:06.876Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -66,21 +32,21 @@
               "RelativeDocumentMoniker": "ScadaGUI\\EditAnalogInput.xaml.cs",
               "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogInput.xaml.cs",
               "RelativeToolTip": "ScadaGUI\\EditAnalogInput.xaml.cs",
-              "ViewState": "AQIAAGMAAAAAAAAAAAAgwHUAAABCAAAA",
+              "ViewState": "AQIAABgAAAAAAAAAAAAowCEAAAAwAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-16T17:33:21.926Z",
+              "WhenOpened": "2024-06-17T15:00:46.691Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "EditAnalogInput.xaml",
-              "DocumentMoniker": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogInput.xaml",
-              "RelativeDocumentMoniker": "ScadaGUI\\EditAnalogInput.xaml",
-              "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogInput.xaml",
-              "RelativeToolTip": "ScadaGUI\\EditAnalogInput.xaml",
+              "Title": "EditAnalogOutput.xaml",
+              "DocumentMoniker": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogOutput.xaml",
+              "RelativeDocumentMoniker": "ScadaGUI\\EditAnalogOutput.xaml",
+              "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogOutput.xaml",
+              "RelativeToolTip": "ScadaGUI\\EditAnalogOutput.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-16T17:33:11.63Z",
+              "WhenOpened": "2024-06-17T14:58:14.256Z",
               "EditorCaption": ""
             }
           ]

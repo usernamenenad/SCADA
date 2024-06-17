@@ -47,3 +47,5 @@ C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\AddAlar
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\AddAlarmOnNewAI.baml
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditAnalogInput.g.cs
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditAnalogInput.baml
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditAnalogOutput.g.cs
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditAnalogOutput.baml

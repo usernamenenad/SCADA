@@ -30,8 +30,8 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
                 <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -53,8 +53,10 @@
                             <Setter Property="BorderBrush" Value="#abdbe3"/>
                         </Style>
                     </UniformGrid.Resources>
-                    <Button Style="{StaticResource Button1}">Potvrdi</Button>
-                    <Button Style="{StaticResource Button1}">Otkaži</Button>
+                    <Button Style="{StaticResource Button1}"
+                            Click="Save">Potvrdi</Button>
+                    <Button Style="{StaticResource Button1}"
+                            Click="Cancel">Otkaži</Button>
                 </UniformGrid>
             </Grid>
 
@@ -82,42 +84,56 @@
                         <StackPanel>
                             <TextBlock Text="Tag"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="50"/>
+                                     MaxLength="50"
+                                     Name="Tag"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Ime"/>
+                            <TextBox Margin="0 5 0 0"
+                                     MaxLength="50"
+                                     Name="Name"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Opis"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"/>
+                                     MaxLength="100"
+                                     Name="Description"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="I/0 adresa"/>
-                            <ComboBox Margin="0 5 0 0"/>
-                        </StackPanel>
-
-                        <StackPanel>
-                            <TextBlock Text="Početna vrijednost"/>
-                            <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"/>
+                            <ComboBox Margin="0 5 0 0"
+                                      Name="Address"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Gornja granica"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"/>
+                                     MaxLength="100"
+                                     Name="HighLimit"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Donja granica"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"/>
+                                     MaxLength="100"
+                                     Name="LowLimit"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Početna vrijednost"/>
+                            <TextBox Margin="0 5 0 0"
+                                     MaxLength="100"
+                                     Name="InitialValue"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Jedinica"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"/>
+                                     MaxLength="100"
+                                     Name="Units"/>
                         </StackPanel>
 
                     </UniformGrid>

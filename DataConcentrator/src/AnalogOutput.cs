@@ -21,7 +21,6 @@ namespace DataConcentrator.src
 
         [Required]
         public string Units { get; set; }
-
         public AnalogOutput() 
         {
             Value = InitialValue;

@@ -37,6 +37,7 @@ namespace ScadaGUI
 
             AlarmList.ItemsSource = Context.Alarms.ToList();
 
+            Manager.SetOutputs();
             Manager.SimulatorManager.StartPLCSimulator();
             StartScanning();
         }
@@ -50,7 +51,7 @@ namespace ScadaGUI
         }
         private void AddAnalogOutput(object sender, RoutedEventArgs e)
         {
-            AddAnalogOutput addAnalogOutput = new AddAnalogOutput()
+            AddAnalogOutput addAnalogOutput = new AddAnalogOutput(Manager, AnalogOutputsList)
             {
                 Owner = this
             };
@@ -90,6 +91,16 @@ namespace ScadaGUI
                 Owner = this
             };
             editAnalogInput.Show();
+        }
+
+        private void EditAnalogOutput(object sender, MouseButtonEventArgs e)
+        {
+            AnalogOutput analogOutput = (sender as DataGridRow)?.DataContext as AnalogOutput;
+            EditAnalogOutput editAnalogOutput = new EditAnalogOutput(analogOutput, Manager, AnalogOutputsList)
+            {
+                Owner = this
+            };
+            editAnalogOutput.Show();
         }
 
         public void StartScanning()

@@ -178,10 +178,16 @@
                     </materialDesign:Card>
                     <materialDesign:Card Margin="5">
                         <DataGrid x:Name="AnalogOutputsList">
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="EditAnalogOutput"/>
+                                </Style>
+                            </DataGrid.Resources>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"/>
                                 <DataGridTextColumn Header="Adresa" Binding="{Binding Address}" Width="*"/>
-                                <DataGridTextColumn Header="Vrijednost" Binding="{Binding Value}" Width="*"/>
+                                <DataGridTextColumn Header="PV" Binding="{Binding InitialValue}" Width="*"/>
+                                <DataGridTextColumn Header="TV" Binding="{Binding Value}" Width="*"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </materialDesign:Card>

@@ -17,7 +17,7 @@ namespace ScadaGUI
         public DataGrid AnalogInputsList;
         public DataGrid AlarmList;
         public List<Alarm> AlarmsToRemove {  get; set; } = new List<Alarm>();
-        public AnalogInput analogInput = new AnalogInput()
+        public AnalogInput AnalogInput = new AnalogInput()
         {
             Alarms = new List<Alarm>()
         };
@@ -38,18 +38,13 @@ namespace ScadaGUI
                 MessageBox.Show(errorMessage, "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            Context.AnalogInputs.Add(analogInput);
-
-            foreach(var alarm in AlarmsToRemove)
-            {
-                Context.Alarms.Remove(alarm);
-            }
+            Context.AnalogInputs.Add(AnalogInput);
  
             if(Owner is MainWindow mainWindow)
             {
-                analogInput.Scanner = new Thread(() => analogInput.Scan(Manager));
-                analogInput.PropertyChanged += mainWindow.UpdateDataGrid;
-                analogInput.Scanner.Start();
+                AnalogInput.Scanner = new Thread(() => AnalogInput.Scan(Manager));
+                AnalogInput.PropertyChanged += mainWindow.UpdateDataGrid;
+                AnalogInput.Scanner.Start();
             }
 
             try
@@ -88,7 +83,7 @@ namespace ScadaGUI
                 MessageBox.Show($"Nemoguće urediti alarme! Razlog - {errorMessage}", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            AddAlarmOnNewAI addAlarmOnNewAI = new AddAlarmOnNewAI(TagId, TagName, LowLimitValue, HighLimitValue, analogInput.Alarms, AlarmsToRemove)
+            AddAlarmOnNewAI addAlarmOnNewAI = new AddAlarmOnNewAI(TagId, TagName, LowLimitValue, HighLimitValue, AnalogInput.Alarms, AlarmsToRemove)
             {
                 Owner = this
             };
@@ -142,15 +137,15 @@ namespace ScadaGUI
         private bool ValidateInputs(out string errorMessage)
         {
             errorMessage = string.Empty;
-            analogInput.Description = Description.Text;
+            AnalogInput.Description = Description.Text;
 
-            // Is the TAG written
+            // Is the TAG given
             if (string.IsNullOrEmpty(Tag.Text)) 
             {
                 errorMessage += "Niste upisali tag!";
                 return true;
             }
-            analogInput.Id = Tag.Text;
+            AnalogInput.Id = Tag.Text;
 
             // Is the Name given
             if (string.IsNullOrEmpty(Name.Text))
@@ -158,7 +153,7 @@ namespace ScadaGUI
                 errorMessage += "Niste upisali ime!";
                 return true;
             }
-            analogInput.Name = Name.Text;
+            AnalogInput.Name = Name.Text;
 
             // Is the I/O ADDRESS selected
             if (Address.SelectedItem == null)
@@ -166,7 +161,7 @@ namespace ScadaGUI
                 errorMessage += "Niste selektovali adresu!";
                 return true;
             }
-            analogInput.Address = Address.Text;
+            AnalogInput.Address = Address.Text;
 
             // Is the Scan Time valid
             if(!double.TryParse(ScanTime.Text, out double ScanTimeValue)) 
@@ -179,7 +174,7 @@ namespace ScadaGUI
                 errorMessage += "Vrijeme skeniranja ne može biti manje od nule!";
                 return true;
             }
-            analogInput.ScanTime = ScanTimeValue;
+            AnalogInput.ScanTime = ScanTimeValue;
 
             // Is the scanning selected
             if(OnOffScan.SelectedItem == null)
@@ -187,7 +182,7 @@ namespace ScadaGUI
                 errorMessage += "Niste selektovali da li želite uključeno ili isključeno skeniranje";
                 return true;
             }
-            analogInput.OnOffScan = OnOffScan.Text == "Uključi";
+            AnalogInput.OnOffScan = OnOffScan.Text == "Uključi";
 
             // Are limits selected and valid
             if(!double.TryParse(HighLimit.Text, out double HighLimitValue))
@@ -205,16 +200,16 @@ namespace ScadaGUI
                 errorMessage += "Nevalidne granice!";
                 return true;
             }
-            analogInput.HighLimit = HighLimitValue;
-            analogInput.LowLimit = LowLimitValue;
+            AnalogInput.HighLimit = HighLimitValue;
+            AnalogInput.LowLimit = LowLimitValue;
 
-            // Is the unit written
+            // Is the unit given
             if(string.IsNullOrEmpty(Unit.Text) || double.TryParse(Unit.Text, out _))
             {
                 errorMessage += "Nepravilna jedinica!";
                 return true;
             }
-            analogInput.Units = Unit.Text;
+            AnalogInput.Units = Unit.Text;
 
             return false;
         }
