@@ -38,8 +38,10 @@ namespace ScadaGUI
             Name.Text = analogInput.Name;
             Description.Text = analogInput.Description;
 
-            List<string> AddressDisplay = new List<string>(Manager.AvailibleAnalogInputs);
-            AddressDisplay.Add(analogInput.Address);
+            List<string> AddressDisplay = new List<string>(Manager.AvailibleAnalogInputs)
+            {
+                analogInput.Address
+            };
             AddressDisplay.Sort();
 
             Address.ItemsSource = AddressDisplay;
@@ -68,21 +70,20 @@ namespace ScadaGUI
             string OldAddress = AnalogInput.Address;
             AnalogInput.Address = Address.Text;
 
-            AnalogInput.ScanTime = double.Parse(ScanTime.Text);
             AnalogInput.OnOffScan = OnOffScan.Text == "Uključi";
+            AnalogInput.ScanTime = double.Parse(ScanTime.Text);
 
             AnalogInput.HighLimit = double.Parse(HighLimit.Text);
             AnalogInput.LowLimit = double.Parse(LowLimit.Text);
 
             AnalogInput.Units = Units.Text;
 
-            foreach (var alarm in AlarmsToRemove)
-            {
-                Context.Alarms.Remove(alarm);
-            }
-
             try
             {
+                foreach (var alarm in AlarmsToRemove)
+                {
+                    Context.Alarms.Remove(alarm);
+                }
                 Context.SaveChanges();
             }
             catch (DbEntityValidationException ex)
@@ -122,7 +123,6 @@ namespace ScadaGUI
                     AnalogInput.Scanner.Abort();
                     Context.AnalogInputs.Remove(AnalogInput);
                     Context.SaveChanges();
-
 
                     Manager.FreeAnalogInput(AnalogInput.Address);
                 }
@@ -181,6 +181,13 @@ namespace ScadaGUI
                 return true;
             }
 
+            // Is that tag already in the table
+            if (Context.AnalogInputs.Any(analogInput => analogInput.Id == Tag.Text))
+            {
+                errorMessage += "Već postoji takav tag!";
+                return true;
+            }
+
             // Is the Name given
             if (string.IsNullOrEmpty(Name.Text))
             {
@@ -211,7 +218,6 @@ namespace ScadaGUI
             HighLimitValue = highLimitValue;
             return false;
         }
-
         private bool ValidateInputs(out string errorMessage)
         {
             errorMessage = string.Empty;

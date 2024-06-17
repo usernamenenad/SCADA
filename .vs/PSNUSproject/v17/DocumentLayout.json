@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\scadagui\\editanaloginput.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|solutionrelative:scadagui\\editanaloginput.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\scadagui\\editanalogoutput.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|solutionrelative:scadagui\\editanalogoutput.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\scadagui\\editanalogoutput.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
-      "RelativeMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|solutionrelative:scadagui\\editanalogoutput.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
+      "AbsoluteMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\scadagui\\editdigitaloutput.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|solutionrelative:scadagui\\editdigitaloutput.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +18,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -27,26 +27,48 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "EditAnalogInput.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogInput.xaml.cs",
-              "RelativeDocumentMoniker": "ScadaGUI\\EditAnalogInput.xaml.cs",
-              "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogInput.xaml.cs",
-              "RelativeToolTip": "ScadaGUI\\EditAnalogInput.xaml.cs",
-              "ViewState": "AQIAABgAAAAAAAAAAAAowCEAAAAwAAAA",
+              "Title": "EditAnalogOutput.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogOutput.xaml.cs",
+              "RelativeDocumentMoniker": "ScadaGUI\\EditAnalogOutput.xaml.cs",
+              "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogOutput.xaml.cs",
+              "RelativeToolTip": "ScadaGUI\\EditAnalogOutput.xaml.cs",
+              "ViewState": "AQIAAF0AAAAAAAAAAAAuwHIAAABDAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-17T15:00:46.691Z",
+              "WhenOpened": "2024-06-17T16:35:16.916Z",
               "EditorCaption": ""
-            },
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "FloatingWindowState": {
+        "Id": "ad5ddb1c-ff5e-4f23-97df-8d0680fbdd5c",
+        "Display": 1,
+        "X": 202,
+        "Y": 117,
+        "Width": 1243,
+        "Height": 740,
+        "WindowState": 2
+      },
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "EditAnalogOutput.xaml",
-              "DocumentMoniker": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogOutput.xaml",
-              "RelativeDocumentMoniker": "ScadaGUI\\EditAnalogOutput.xaml",
-              "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditAnalogOutput.xaml",
-              "RelativeToolTip": "ScadaGUI\\EditAnalogOutput.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-17T14:58:14.256Z",
+              "Title": "EditDigitalOutput.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditDigitalOutput.xaml.cs",
+              "RelativeDocumentMoniker": "ScadaGUI\\EditDigitalOutput.xaml.cs",
+              "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\EditDigitalOutput.xaml.cs",
+              "RelativeToolTip": "ScadaGUI\\EditDigitalOutput.xaml.cs",
+              "ViewState": "AQIAABcAAAAAAAAAAAAowDgAAAArAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-06-17T16:29:52.805Z",
               "EditorCaption": ""
             }
           ]

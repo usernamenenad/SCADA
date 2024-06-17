@@ -8,7 +8,8 @@
         mc:Ignorable="d"
         Title="Dodaj digitalni ulaz" 
         Height="650" 
-        Width="800">
+        Width="800"
+        ResizeMode="NoResize">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -30,8 +31,8 @@
         <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="3*"/>
                 <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
@@ -53,8 +54,10 @@
                             <Setter Property="BorderBrush" Value="#abdbe3"/>
                         </Style>
                     </UniformGrid.Resources>
-                    <Button Style="{StaticResource Button1}">Potvrdi</Button>
-                    <Button Style="{StaticResource Button1}">Otkaži</Button>
+                    <Button Style="{StaticResource Button1}"
+                            Click="Save">Potvrdi</Button>
+                    <Button Style="{StaticResource Button1}"
+                            Click="Cancel">Otkaži</Button>
                 </UniformGrid>
             </Grid>
 
@@ -82,29 +85,41 @@
                         <StackPanel>
                             <TextBlock Text="Tag"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="50"/>
+                                     MaxLength="50"
+                                     Name="Tag"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Ime"/>
+                            <TextBox Margin="0 5 0 0"
+                                     MaxLength="50"
+                                     Name="Name"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Opis"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"/>
+                                     MaxLength="100"
+                                     Name="Description"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="I/0 adresa"/>
-                            <ComboBox Margin="0 5 0 0"/>
+                            <ComboBox Margin="0 5 0 0"
+                                      Name="Address"/>
+                        </StackPanel>
+
+                        <StackPanel>
+                            <TextBlock Text="Uključi/Isključi skeniranje"/>
+                            <ComboBox Margin="0 5 0 0"
+                                      Name="OnOffScan"/>
                         </StackPanel>
 
                         <StackPanel>
                             <TextBlock Text="Vrijeme skeniranja"/>
                             <TextBox Margin="0 5 0 0"
-                                     MaxLength="100"/>
-                        </StackPanel>
-
-                        <StackPanel>
-                            <TextBlock Text="ON/OFF skeniranje"/>
-                            <ComboBox Margin="0 5 0 0"/>
+                                     MaxLength="100"
+                                     Name="ScanTime"/>
                         </StackPanel>
 
                     </UniformGrid>

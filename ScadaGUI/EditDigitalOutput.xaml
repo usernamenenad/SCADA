@@ -1,4 +1,4 @@
-﻿<Window x:Class="ScadaGUI.AddDigitalOutput"
+﻿<Window x:Class="ScadaGUI.EditDigitalOutput"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:ScadaGUI"
         mc:Ignorable="d"
-        Title="Dodaj digitalni izlaz" 
+        Title="Uredi digitalni izlaz" 
         Height="650" 
         Width="800"
         ResizeMode="NoResize">
@@ -20,7 +20,7 @@
             <Border>
                 <Border.Background>
                     <LinearGradientBrush StartPoint="0, 0" 
-                                         EndPoint="1, 1">
+                                     EndPoint="1, 1">
                         <GradientStop Color="#eeeee4" Offset="0.5"/>
                         <GradientStop Color="#abdbe3" Offset="0.3"/>
                     </LinearGradientBrush>
@@ -46,8 +46,8 @@
                 <UniformGrid Columns="1">
                     <UniformGrid.Resources>
                         <Style x:Key="Button1"
-                               BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}"
-                               TargetType="Button">
+                           BasedOn="{StaticResource MaterialDesignFlatDarkBgButton}"
+                           TargetType="Button">
                             <Setter Property="Margin" Value="20"/>
                             <Setter Property="Background" Value="AliceBlue"/>
                             <Setter Property="Foreground" Value="Black"/>
@@ -56,6 +56,8 @@
                     </UniformGrid.Resources>
                     <Button Style="{StaticResource Button1}"
                             Click="Save">Potvrdi</Button>
+                    <Button Style="{StaticResource Button1}"
+                            Click="Delete">Obriši</Button>
                     <Button Style="{StaticResource Button1}"
                             Click="Cancel">Otkaži</Button>
                 </UniformGrid>
@@ -70,7 +72,7 @@
             </Grid.RowDefinitions>
 
             <Grid Grid.Row="0">
-                <TextBlock Text="Dodaj digitalni izlaz"
+                <TextBlock Text="Uredi digitalni izlaz"
                            Margin="20 0 0 0"
                            FontSize="30"
                            FontWeight="DemiBold"
@@ -86,7 +88,8 @@
                             <TextBlock Text="Tag"/>
                             <TextBox Margin="0 5 0 0"
                                      MaxLength="50"
-                                     Name="Tag"/>
+                                     Name="Tag"
+                                     IsEnabled="False"/>
                         </StackPanel>
 
                         <StackPanel>
@@ -110,10 +113,10 @@
                         </StackPanel>
 
                         <StackPanel>
-                            <TextBlock Text="Početna vrijednost"/>
+                            <TextBlock Text="Trenutna vrijednost"/>
                             <TextBox Margin="0 5 0 0"
                                      MaxLength="100"
-                                     Name="InitialValue"/>
+                                     Name="CurrentValue"/>
                         </StackPanel>
 
                     </UniformGrid>
@@ -121,5 +124,4 @@
             </Grid>
         </Grid>
     </Grid>
-    
 </Window>

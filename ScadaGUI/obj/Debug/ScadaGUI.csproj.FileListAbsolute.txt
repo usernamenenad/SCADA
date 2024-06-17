@@ -49,3 +49,7 @@ C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditAna
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditAnalogInput.baml
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditAnalogOutput.g.cs
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditAnalogOutput.baml
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditDigitalInput.g.cs
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditDigitalInput.baml
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditDigitalOutput.g.cs
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditDigitalOutput.baml

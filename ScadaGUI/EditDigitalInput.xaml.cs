@@ -17,38 +17,38 @@ using System.Data.Entity.Validation;
 
 namespace ScadaGUI
 {
-    public partial class EditAnalogOutput : Window
+    public partial class EditDigitalInput : Window
     {
         private readonly DataConcentratorContext Context = DataConcentratorContext.Instance;
         public PLCManager Manager;
-        public AnalogOutput AnalogOutput;
-        public DataGrid AnalogOutputsList;
-        public EditAnalogOutput(AnalogOutput analogOutput, PLCManager manager, DataGrid analogOutputsList)
+        public DigitalInput DigitalInput;
+        public DataGrid DigitalInputsList;
+        public EditDigitalInput(DigitalInput digitalInput, PLCManager manager, DataGrid digitalInputsList)
         {
             InitializeComponent();
 
+            DigitalInput = digitalInput;
             Manager = manager;
-            AnalogOutput = analogOutput;
-            AnalogOutputsList = analogOutputsList;
+            DigitalInputsList = digitalInputsList;
 
-            Tag.Text = analogOutput.Id;
-            Name.Text = analogOutput.Name;
-            Description.Text = analogOutput.Description;
+            Tag.Text = digitalInput.Id;
+            Name.Text = digitalInput.Name;
+            Description.Text = digitalInput.Description;
 
-            List<string> AddressDisplay = new List<string>(Manager.AvailibleAnalogOutputs);
-            AddressDisplay.Add(analogOutput.Address);
+            List<string> AddressDisplay = new List<string>(Manager.AvailibleDigitalInputs)
+            {
+                digitalInput.Address
+            };
             AddressDisplay.Sort();
 
             Address.ItemsSource = AddressDisplay;
-            Address.SelectedItem = analogOutput.Address;
+            Address.SelectedItem = digitalInput.Address;
 
-            LowLimit.Text = analogOutput.LowLimit.ToString();
-            HighLimit.Text = analogOutput.HighLimit.ToString();
-            CurrentValue.Text = analogOutput.Value.ToString();
+            ScanTime.Text = digitalInput.ScanTime.ToString();
 
-            Units.Text = analogOutput.Units.ToString();
+            OnOffScan.ItemsSource = new List<string> { "Uključi", "Isključi" };
+            OnOffScan.SelectedItem = digitalInput.OnOffScan ? "Uključi" : "Isključi";
         }
-
         public void Save(object sender, RoutedEventArgs e)
         {
             if(ValidateInputs(out string errorMessage))
@@ -57,17 +57,14 @@ namespace ScadaGUI
                 return;
             }
 
-            AnalogOutput.Name = Name.Text;
-            AnalogOutput.Description = Description.Text;
+            DigitalInput.Name = Name.Text;
+            DigitalInput.Description = Description.Text;
 
-            string OldAddress = AnalogOutput.Address;
-            AnalogOutput.Address = Address.Text;
+            string OldAddress = DigitalInput.Address;
+            DigitalInput.Address = Address.Text;
 
-            AnalogOutput.LowLimit = double.Parse(LowLimit.Text);
-            AnalogOutput.HighLimit = double.Parse(HighLimit.Text);
-            AnalogOutput.Value = double.Parse(CurrentValue.Text);
-
-            AnalogOutput.Units = Units.Text;
+            DigitalInput.OnOffScan = OnOffScan.Text == "Uključi";
+            DigitalInput.ScanTime = double.Parse(ScanTime.Text);
 
             try
             {
@@ -79,26 +76,21 @@ namespace ScadaGUI
                 {
                     foreach (var ve in eve.ValidationErrors)
                     {
-                        MessageBox.Show($"{ve.PropertyName}, {ve.ErrorMessage}", "Greška");
+                        MessageBox.Show($"{ve.PropertyName}, {ve.ErrorMessage}");
                     }
                 }
                 return;
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex}", "Greška");
-                return;
-            }
 
-            AnalogOutputsList.ItemsSource = Context.AnalogOutputs.ToList();
+            DigitalInputsList.ItemsSource = Context.DigitalInputs.ToList();
 
             if(OldAddress != Address.Text)
-            {
-                Manager.FreeAnalogOutput(OldAddress);
-                Manager.TakeAnalogOutput(AnalogOutput.Address);
+            {            
+                Manager.FreeDigitalInput(OldAddress);
+                Manager.TakeDigitalInput(Address.Text);
             }
 
-            MessageBox.Show("Uspješno uređen analogni izlaz!", "Uredi analogni izlaz", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Uspješno uređen digitalni ulaz!", "Uredi analogni ulaz", MessageBoxButton.OK, MessageBoxImage.Information);
 
             Close();
         }
@@ -109,10 +101,11 @@ namespace ScadaGUI
             {
                 try
                 {
-                    Context.AnalogOutputs.Remove(AnalogOutput);
+                    DigitalInput.Scanner.Abort();
+                    Context.DigitalInputs.Remove(DigitalInput);
                     Context.SaveChanges();
 
-                    Manager.FreeAnalogOutput(AnalogOutput.Address);
+                    Manager.FreeDigitalInput(DigitalInput.Address);
                 }
                 catch (DbEntityValidationException ex)
                 {
@@ -126,8 +119,8 @@ namespace ScadaGUI
                     return;
                 }
 
-                AnalogOutputsList.ItemsSource = Context.AnalogOutputs.ToList();
-                
+                DigitalInputsList.ItemsSource = Context.DigitalInputs.ToList();
+
                 Close();
             }
         }
@@ -151,7 +144,7 @@ namespace ScadaGUI
             }
 
             // Is that tag already in the table
-            if (Context.AnalogOutputs.Any(analogOutput => analogOutput.Id == Tag.Text))
+            if (Context.DigitalInputs.Any(digitalOutput => digitalOutput.Id == Tag.Text))
             {
                 errorMessage += "Već postoji takav tag!";
                 return true;
@@ -171,39 +164,22 @@ namespace ScadaGUI
                 return true;
             }
 
-            // Check if high and low limits are valid
-            if (!double.TryParse(HighLimit.Text, out double HighLimitValue))
+            // Is the scanning selected
+            if (OnOffScan.SelectedItem == null)
             {
-                errorMessage += "Nevalidna gornja granica!";
-                return true;
-            }
-            if (!double.TryParse(LowLimit.Text, out double LowLimitValue))
-            {
-                errorMessage += "Nevalidna donja granica!";
-                return true;
-            }
-            if (HighLimitValue <= LowLimitValue)
-            {
-                errorMessage += "Nevalidne granice!";
+                errorMessage += "Niste selektovali da li želite uključeno ili isključeno skeniranje";
                 return true;
             }
 
-            // Is the Current Value valid
-            if (string.IsNullOrEmpty(CurrentValue.Text) || !double.TryParse(CurrentValue.Text, out double CurrentValueValue))
+            // Is the Scan Time valid
+            if (!double.TryParse(ScanTime.Text, out double ScanTimeValue))
             {
-                errorMessage += "Nevalidna trenutna vrijednost!";
+                errorMessage += "Nevalidno vrijeme skeniranja!";
                 return true;
             }
-            if (CurrentValueValue > HighLimitValue || CurrentValueValue < LowLimitValue)
+            else if (ScanTimeValue <= 0)
             {
-                errorMessage += "Nevalidna trenutna vrijednost!";
-                return true;
-            }
-
-            // Is the unit given
-            if (string.IsNullOrEmpty(Units.Text) || double.TryParse(Units.Text, out _))
-            {
-                errorMessage += "Nepravilna jedinica!";
+                errorMessage += "Vrijeme skeniranja ne može biti manje od nule!";
                 return true;
             }
 

@@ -151,6 +151,19 @@ namespace PLCSimulator
             }
         }
 
+        public double GetDigitalValue(string address)
+        {
+
+            if (DigitalInputAddress.ContainsKey(address))
+            {
+                return DigitalInputAddress[address];
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
         public void SetAnalogValue(string address, double value)
         {
             if (AnalogOutputAddress.ContainsKey(address))

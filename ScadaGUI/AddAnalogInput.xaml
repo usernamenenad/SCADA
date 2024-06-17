@@ -110,16 +110,16 @@
                         </StackPanel>
 
                         <StackPanel>
+                            <TextBlock Text="Uključi/Isključi skeniranje"/>
+                            <ComboBox Margin="0 5 0 0"
+                                      x:Name="OnOffScan"/>
+                        </StackPanel>
+
+                        <StackPanel>
                             <TextBlock Text="Vrijeme skeniranja"/>
                             <TextBox Margin="0 5 0 0"
                                      MaxLength="100"
                                      x:Name="ScanTime"/>
-                        </StackPanel>
-                        
-                        <StackPanel>
-                            <TextBlock Text="ON/OFF skeniranje"/>
-                            <ComboBox Margin="0 5 0 0"
-                                      x:Name="OnOffScan"/>
                         </StackPanel>
 
                         <StackPanel>

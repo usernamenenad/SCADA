@@ -17,32 +17,53 @@ using System.Data.Entity.Validation;
 
 namespace ScadaGUI
 {
-    public partial class AddDigitalOutput : Window
+    public partial class EditDigitalOutput : Window
     {
         private readonly DataConcentratorContext Context = DataConcentratorContext.Instance;
         public PLCManager Manager;
+        public DigitalOutput DigitalOutput;
         public DataGrid DigitalOutputsList;
-        public DigitalOutput DigitalOutput = new DigitalOutput();
-
-        public AddDigitalOutput(PLCManager manager, DataGrid digitalOutputsList)
+        public EditDigitalOutput(DigitalOutput digitalOutput, PLCManager manager, DataGrid digitalOutputsList)
         {
             InitializeComponent();
 
             Manager = manager;
+            DigitalOutput = digitalOutput;
             DigitalOutputsList = digitalOutputsList;
-            Address.ItemsSource = Manager.AvailibleDigitalOutputs;
+
+            Tag.Text = digitalOutput.Id;
+            Name.Text = digitalOutput.Name;
+            Description.Text = digitalOutput.Description;
+
+            List<string> AddressDisplay = new List<string>(Manager.AvailibleDigitalOutputs)
+            {
+                digitalOutput.Address
+            };
+            AddressDisplay.Sort();
+
+            Address.ItemsSource = AddressDisplay;
+            Address.SelectedItem = digitalOutput.Address;
+
+            CurrentValue.Text = digitalOutput.Value.ToString();
         }
-        private void Save(object sender, RoutedEventArgs e)
+        private void Save(object sender, RoutedEventArgs e) 
         {
-            if(ValidateInputs(out string errorMessage))
+            if (ValidateInputs(out string errorMessage))
             {
                 MessageBox.Show(errorMessage, "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
+            DigitalOutput.Name = Name.Text;
+            DigitalOutput.Description = Description.Text;
+
+            string OldAddress = DigitalOutput.Address;
+            DigitalOutput.Address = Address.Text;
+
+            DigitalOutput.Value = int.Parse(CurrentValue.Text);
+
             try
             {
-                Context.DigitalOutputs.Add(DigitalOutput);
                 Context.SaveChanges();
             }
             catch (DbEntityValidationException ex)
@@ -51,20 +72,33 @@ namespace ScadaGUI
                 {
                     foreach (var ve in eve.ValidationErrors)
                     {
-                        MessageBox.Show($"{ve.PropertyName}, {ve.ErrorMessage}");
+                        MessageBox.Show($"{ve.PropertyName}, {ve.ErrorMessage}", "Greška");
                     }
                 }
                 return;
             }
+            catch (Exception ex) 
+            {
+                MessageBox.Show($"{ex}", "Greška");
+                return;
+            }
 
             DigitalOutputsList.ItemsSource = Context.DigitalOutputs.ToList();
-            Manager.TakeDigitalOutput(DigitalOutput.Address);
+            
+            if(OldAddress != Address.Text)
+            {
+                Manager.FreeDigitalOutput(OldAddress);
+                Manager.TakeDigitalOutput(DigitalOutput.Address);
+            }
 
-            MessageBox.Show("Uspješno dodat digitalni izlaz!", "Dodaj analogni izlaz", MessageBoxButton.OK, MessageBoxImage.Information);
+            MessageBox.Show("Uspješno uređen digitalni izlaz!", "Uredi digitalni izlaz", MessageBoxButton.OK, MessageBoxImage.Information);
 
             Close();
         }
-        private void Cancel(object sender, RoutedEventArgs e) 
+        private void Delete(object sender, RoutedEventArgs e)
+        {
+        }
+        private void Cancel(object sender, RoutedEventArgs e)
         {
             var result = MessageBox.Show("Da li ste sigurni da želite otkazati dodavanje?", "Greška", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
             if (result == MessageBoxResult.Yes)
@@ -83,14 +117,6 @@ namespace ScadaGUI
                 errorMessage += "Niste upisali tag!";
                 return true;
             }
-            DigitalOutput.Id = Tag.Text;
-
-            // Is that tag already in the table
-            if (Context.DigitalOutputs.Any(digitalOutput => digitalOutput.Id == Tag.Text))
-            {
-                errorMessage += "Već postoji takav tag!";
-                return true;
-            }
 
             // Is the Name given
             if (string.IsNullOrEmpty(Name.Text))
@@ -98,7 +124,6 @@ namespace ScadaGUI
                 errorMessage += "Niste upisali ime!";
                 return true;
             }
-            DigitalOutput.Name = Name.Text;
 
             // Is the I/O ADDRESS selected
             if (Address.SelectedItem == null)
@@ -106,21 +131,18 @@ namespace ScadaGUI
                 errorMessage += "Niste selektovali adresu!";
                 return true;
             }
-            DigitalOutput.Address = Address.Text;
 
             // Is the Initial Value valid
-            if (string.IsNullOrEmpty(InitialValue.Text) || !int.TryParse(InitialValue.Text, out int InitialValueValue))
+            if (string.IsNullOrEmpty(CurrentValue.Text) || !int.TryParse(CurrentValue.Text, out int CurrentValueValue))
             {
-                errorMessage += "Nevalidna početna vrijednost!";
+                errorMessage += "Nevalidna trenutna vrijednost!";
                 return true;
             }
-            if (!new List<int>() { 0, 1 }.Contains(InitialValueValue))
+            if (!new List<int>() { 0, 1 }.Contains(CurrentValueValue))
             {
                 errorMessage += "Nevalidna početna vrijednost! Mora biti 0 ili 1!";
                 return true;
             }
-            DigitalOutput.InitialValue = InitialValueValue;
-            DigitalOutput.Value = InitialValueValue;
 
             return false;
         }

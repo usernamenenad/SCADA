@@ -39,6 +39,10 @@ namespace DataConcentrator
             {
                 analogOutput.Value = analogOutput.InitialValue;
             }
+            foreach(var digitalOutput in Context.DigitalOutputs)
+            {
+                digitalOutput.Value = digitalOutput.InitialValue;
+            }
         }
         
         // Take addresses
@@ -70,7 +74,7 @@ namespace DataConcentrator
             AvailibleAnalogOutputs.Add(address);
             AvailibleAnalogOutputs.Sort();
         }
-        public void FreDigitalInput(string address)
+        public void FreeDigitalInput(string address)
         {
             AvailibleDigitalInputs.Add(address);
             AvailibleDigitalInputs.Sort();

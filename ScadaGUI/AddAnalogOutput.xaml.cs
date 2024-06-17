@@ -17,6 +17,7 @@ namespace ScadaGUI
         public PLCManager Manager;
         public DataGrid AnalogOutputsList;
         public AnalogOutput AnalogOutput = new AnalogOutput();
+
         public AddAnalogOutput(PLCManager manager, DataGrid analogOutputsList)
         {
             InitializeComponent();
@@ -32,9 +33,9 @@ namespace ScadaGUI
                 return;
             }
 
-            Context.AnalogOutputs.Add(AnalogOutput);
             try
             {
+                Context.AnalogOutputs.Add(AnalogOutput);
                 Context.SaveChanges();
             }
             catch (DbEntityValidationException ex)
@@ -51,7 +52,10 @@ namespace ScadaGUI
 
             AnalogOutputsList.ItemsSource = Context.AnalogOutputs.ToList();
             Manager.TakeAnalogOutput(AnalogOutput.Address);
-            MessageBox.Show("Uspješno uređen analogni izlaz!", "Dodaj analogni izlaz", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            MessageBox.Show("Uspješno dodat analogni izlaz!", "Dodaj analogni izlaz", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            Close();
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {
@@ -73,6 +77,13 @@ namespace ScadaGUI
                 return true;
             }
             AnalogOutput.Id = Tag.Text;
+
+            // Is that tag already in the table
+            if (Context.AnalogOutputs.Any(analogOutputs => analogOutputs.Id == Tag.Text))
+            {
+                errorMessage += "Već postoji takav tag!";
+                return true;
+            }
 
             // Is the Name given
             if (string.IsNullOrEmpty(Name.Text))

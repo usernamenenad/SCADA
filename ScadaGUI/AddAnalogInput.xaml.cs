@@ -24,13 +24,14 @@ namespace ScadaGUI
         public AddAnalogInput(PLCManager manager, DataGrid analogInputsList, DataGrid alarmList)
         {
             InitializeComponent();
+
             Manager = manager;
-            AnalogInputsList = analogInputsList;
             Address.ItemsSource = Manager.AvailibleAnalogInputs;
             OnOffScan.ItemsSource = new List<string> { "Uključi", "Isključi" };
+
+            AnalogInputsList = analogInputsList;
             AlarmList = alarmList;
         }
-
         private void Save(object sender, RoutedEventArgs e)
         {
             if(ValidateInputs(out string errorMessage))
@@ -38,17 +39,18 @@ namespace ScadaGUI
                 MessageBox.Show(errorMessage, "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            Context.AnalogInputs.Add(AnalogInput);
- 
-            if(Owner is MainWindow mainWindow)
-            {
-                AnalogInput.Scanner = new Thread(() => AnalogInput.Scan(Manager));
-                AnalogInput.PropertyChanged += mainWindow.UpdateDataGrid;
-                AnalogInput.Scanner.Start();
-            }
 
             try
             {
+                Context.AnalogInputs.Add(AnalogInput);
+
+                if (Owner is MainWindow mainWindow)
+                {
+                    AnalogInput.Scanner = new Thread(() => AnalogInput.Scan(Manager));
+                    AnalogInput.PropertyChanged += mainWindow.UpdateAnalogDataGrid;
+                    AnalogInput.Scanner.Start();
+                }
+
                 Context.SaveChanges();
             }
             catch (DbEntityValidationException ex) 
@@ -65,7 +67,7 @@ namespace ScadaGUI
 
             AnalogInputsList.ItemsSource = Context.AnalogInputs.ToList();
             AlarmList.ItemsSource = Context.Alarms.ToList();
-            Manager.TakeAnalogInput(Address.Text);
+            Manager.TakeAnalogInput(AnalogInput.Address);
             MessageBox.Show("Uspješno uređen analogni ulaz!", "Dodaj analogni ulaz", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         private void Cancel(object sender, RoutedEventArgs e) 
@@ -147,6 +149,13 @@ namespace ScadaGUI
             }
             AnalogInput.Id = Tag.Text;
 
+            // Is that tag already in the table
+            if (Context.AnalogInputs.Any(analogInputs => analogInputs.Id == Tag.Text))
+            {
+                errorMessage += "Već postoji takav tag!";
+                return true;
+            }
+
             // Is the Name given
             if (string.IsNullOrEmpty(Name.Text))
             {
@@ -163,8 +172,16 @@ namespace ScadaGUI
             }
             AnalogInput.Address = Address.Text;
 
+            // Is the scanning selected
+            if (OnOffScan.SelectedItem == null)
+            {
+                errorMessage += "Niste selektovali da li želite uključeno ili isključeno skeniranje";
+                return true;
+            }
+            AnalogInput.OnOffScan = OnOffScan.Text == "Uključi";
+
             // Is the Scan Time valid
-            if(!double.TryParse(ScanTime.Text, out double ScanTimeValue)) 
+            if (!double.TryParse(ScanTime.Text, out double ScanTimeValue)) 
             {
                 errorMessage += "Nevalidno vrijeme skeniranja!";
                 return true;
@@ -175,14 +192,6 @@ namespace ScadaGUI
                 return true;
             }
             AnalogInput.ScanTime = ScanTimeValue;
-
-            // Is the scanning selected
-            if(OnOffScan.SelectedItem == null)
-            {
-                errorMessage += "Niste selektovali da li želite uključeno ili isključeno skeniranje";
-                return true;
-            }
-            AnalogInput.OnOffScan = OnOffScan.Text == "Uključi";
 
             // Are limits selected and valid
             if(!double.TryParse(HighLimit.Text, out double HighLimitValue))

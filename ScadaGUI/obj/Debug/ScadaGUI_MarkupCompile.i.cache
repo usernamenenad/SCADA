@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\App.xaml
-9-786211863
+11-360976350
 
-141655155851
+16-1625906250
 21264073599
-AddAlarm.xaml;AddAlarmOnNewAI.xaml;AddAnalogInput.xaml;AddAnalogOutput.xaml;AddDigitalInput.xaml;AddDigitalOutput.xaml;EditAnalogInput.xaml;EditAnalogOutput.xaml;MainWindow.xaml;
+AddAlarm.xaml;AddAlarmOnNewAI.xaml;AddAnalogInput.xaml;AddAnalogOutput.xaml;AddDigitalInput.xaml;AddDigitalOutput.xaml;EditAnalogInput.xaml;EditAnalogOutput.xaml;EditDigitalInput.xaml;EditDigitalOutput.xaml;MainWindow.xaml;
 
 True
 

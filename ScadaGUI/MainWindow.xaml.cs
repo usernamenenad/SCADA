@@ -59,7 +59,7 @@ namespace ScadaGUI
         }
         private void AddDigitalInput(object sender, RoutedEventArgs e)
         {
-            AddDigitalInput addDigitalInput = new AddDigitalInput()
+            AddDigitalInput addDigitalInput = new AddDigitalInput(Manager, DigitalInputsList)
             {
                 Owner = this
             };
@@ -67,7 +67,7 @@ namespace ScadaGUI
         }
         private void AddDigitalOutput(object sender, RoutedEventArgs e)
         {
-            AddDigitalOutput addDigitalOutput = new AddDigitalOutput()
+            AddDigitalOutput addDigitalOutput = new AddDigitalOutput(Manager, DigitalOutputsList)
             {
                 Owner = this
             };
@@ -92,7 +92,6 @@ namespace ScadaGUI
             };
             editAnalogInput.Show();
         }
-
         private void EditAnalogOutput(object sender, MouseButtonEventArgs e)
         {
             AnalogOutput analogOutput = (sender as DataGridRow)?.DataContext as AnalogOutput;
@@ -102,30 +101,66 @@ namespace ScadaGUI
             };
             editAnalogOutput.Show();
         }
+        private void EditDigitalInput(object sender, MouseButtonEventArgs e)
+        {
+            DigitalInput digitalInput = (sender as DataGridRow)?.DataContext as DigitalInput;
+            EditDigitalInput editDigitalInput = new EditDigitalInput(digitalInput, Manager, DigitalInputsList)
+            {
+                Owner = this
+            };
+            editDigitalInput.Show();
+        }
+        private void EditDigitalOutput(object sender, MouseButtonEventArgs e)
+        {
+            DigitalOutput digitalOutput = (sender as DataGridRow)?.DataContext as DigitalOutput;
+            EditDigitalOutput editDigitalOutput = new EditDigitalOutput(digitalOutput, Manager, DigitalOutputsList)
+            {
+                Owner = this
+            };
+            editDigitalOutput.Show();
+        }
 
         public void StartScanning()
         {
-            foreach(var analogInput in Context.AnalogInputs.ToList())
+            foreach(var analogInput in Context.AnalogInputs)
             {
-                analogInput.PropertyChanged += UpdateDataGrid;
+                analogInput.PropertyChanged += UpdateAnalogDataGrid;
                 analogInput.Scanner = new Thread(() => analogInput.Scan(Manager));
                 analogInput.Scanner.Start();
             }
+            foreach (var digitalInput in Context.DigitalInputs)
+            {
+                digitalInput.PropertyChanged += UpdateDigitalDataGrid;
+                digitalInput.Scanner = new Thread(() => digitalInput.Scan(Manager));
+                digitalInput.Scanner.Start();
+            }
         }
-        public void UpdateDataGrid(object sender, PropertyChangedEventArgs e)
+        public void UpdateAnalogDataGrid(object sender, PropertyChangedEventArgs e)
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
                 AnalogInputsList.ItemsSource = Context.AnalogInputs.ToList();
             });
         }
+        public void UpdateDigitalDataGrid(object sender, PropertyChangedEventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                DigitalInputsList.ItemsSource = Context.DigitalInputs.ToList();
+            });
+        }
 
         private void Window_Closing(object sender, CancelEventArgs e)
         {
-            foreach (var analogInput in Context.AnalogInputs.ToList())
+            foreach (var analogInput in Context.AnalogInputs)
             {
                 analogInput.Scanner.Abort();
-                analogInput.PropertyChanged -= UpdateDataGrid;
+                analogInput.PropertyChanged -= UpdateAnalogDataGrid;
+            }
+            foreach (var digitalInput in Context.DigitalInputs)
+            {
+                digitalInput.Scanner.Abort();
+                digitalInput.PropertyChanged -= UpdateDigitalDataGrid;
             }
             Manager.SimulatorManager.Abort();
         }

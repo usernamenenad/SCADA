@@ -33,9 +33,9 @@ namespace DataConcentrator.src
         [Required]
         public List<Alarm> Alarms { get; set; } = new List<Alarm>();
 
-        public Thread Scanner;
-
         public event PropertyChangedEventHandler PropertyChanged;
+
+        public Thread Scanner;
 
         public void Scan(PLCManager Manager)
         {
