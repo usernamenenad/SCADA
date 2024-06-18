@@ -51,13 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\202406161227497_Init.cs" />
-    <Compile Include="Migrations\202406161227497_Init.Designer.cs">
-      <DependentUpon>202406161227497_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202406181107223_IsActiveChange.cs" />
-    <Compile Include="Migrations\202406181107223_IsActiveChange.Designer.cs">
-      <DependentUpon>202406181107223_IsActiveChange.cs</DependentUpon>
+    <Compile Include="Migrations\202406181327555_Init.cs" />
+    <Compile Include="Migrations\202406181327555_Init.Designer.cs">
+      <DependentUpon>202406181327555_Init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="PLCManager.cs" />
@@ -84,11 +80,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202406161227497_Init.resx">
-      <DependentUpon>202406161227497_Init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202406181107223_IsActiveChange.resx">
-      <DependentUpon>202406181107223_IsActiveChange.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202406181327555_Init.resx">
+      <DependentUpon>202406181327555_Init.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -74,10 +74,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AddAlarm.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="AddAlarmOnNewAI.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -118,9 +114,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="AddAlarm.xaml.cs">
-      <DependentUpon>AddAlarm.xaml</DependentUpon>
-    </Compile>
     <Compile Include="AddAlarmOnNewAI.xaml.cs">
       <DependentUpon>AddAlarmOnNewAI.xaml</DependentUpon>
     </Compile>

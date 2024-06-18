@@ -6,7 +6,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Runtime.Remoting.Contexts;
 using System.Threading;
-using static System.Net.Mime.MediaTypeNames;
+using System.Windows;
 
 namespace DataConcentrator
 {
@@ -34,6 +34,7 @@ namespace DataConcentrator
         
         // Set outputs
         public void SetOutputs()
+
         {
             foreach(var analogInput in Context.AnalogInputs)
             {

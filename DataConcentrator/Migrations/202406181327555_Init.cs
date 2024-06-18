@@ -26,7 +26,6 @@
                         Id = c.String(nullable: false, maxLength: 128),
                         Name = c.String(nullable: false),
                         Description = c.String(),
-                        IsActive = c.Boolean(nullable: false),
                         ActivationValue = c.Double(nullable: false),
                         ActivationEdge = c.Int(nullable: false),
                         Priority = c.Int(nullable: false),

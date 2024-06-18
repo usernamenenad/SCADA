@@ -47,7 +47,6 @@ namespace ScadaGUI
                 if (Owner is MainWindow mainWindow)
                 {
                     AnalogInput.Scanner = new Thread(() => AnalogInput.Scan(Manager));
-                    AnalogInput.PropertyChanged += mainWindow.UpdateAnalogDataGrid;
                     AnalogInput.Scanner.Start();
                 }
 

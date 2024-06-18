@@ -201,6 +201,7 @@ namespace ScadaGUI
                         existingAlarm.Name = alarmGUIItem.Name.Text;
                         existingAlarm.Description = alarmGUIItem.Description.Text;
                         existingAlarm.IsActive = false;
+                        existingAlarm.IsAcknowledged = false;
                         existingAlarm.ActivationValue = double.Parse(alarmGUIItem.ActivationValue.Text);
                         existingAlarm.ActivationEdge = EdgeMap[alarmGUIItem.ActivatesAt.Text];
                         existingAlarm.Priority = PriorityMap[alarmGUIItem.Type];
@@ -215,6 +216,7 @@ namespace ScadaGUI
                             Name = alarmGUIItem.Name.Text,
                             Description = alarmGUIItem.Description.Text,
                             IsActive = false,
+                            IsAcknowledged = false,
                             ActivationValue = double.Parse(alarmGUIItem.ActivationValue.Text),
                             ActivationEdge = EdgeMap[alarmGUIItem.ActivatesAt.Text],
                             Priority = PriorityMap[alarmGUIItem.Type],

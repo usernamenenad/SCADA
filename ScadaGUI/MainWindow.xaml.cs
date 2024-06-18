@@ -9,6 +9,8 @@ using DataConcentrator;
 using DataConcentrator.src;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Data.Entity.Validation;
 
 namespace ScadaGUI
 {
@@ -39,7 +41,20 @@ namespace ScadaGUI
 
             Manager.SetOutputs();
             Manager.SimulatorManager.StartPLCSimulator();
+
+            SubsrcibeToEvents();
+
             StartScanning();
+        }
+        void SubsrcibeToEvents()
+        {
+            foreach (var analogInput in Context.AnalogInputs)
+            {
+                foreach(var alarm in analogInput.Alarms)
+                {
+                    alarm.PropertyChanged += UpdateAlarms;
+                }
+            }
         }
         private void AddAnalogInput(object sender, RoutedEventArgs e)
         {
@@ -72,14 +87,6 @@ namespace ScadaGUI
                 Owner = this
             };
             addDigitalOutput.Show();
-        }
-        private void AddAlarm(object sender, RoutedEventArgs e)
-        {
-            AddAlarm addAlarm = new AddAlarm()
-            {
-                Owner = this
-            };
-            addAlarm.Show();
         }
 
         // Double click on grid row event handlers
@@ -119,12 +126,6 @@ namespace ScadaGUI
             };
             editDigitalOutput.Show();
         }
-        private void EditAlarm(object sender, MouseButtonEventArgs e)
-        {
-            Alarm alarm = (sender as DataGridRow)?.DataContext as Alarm;
-            alarm.IsActive = false;
-        }
-
         public void StartScanning()
         {
             foreach(var analogInput in Context.AnalogInputs)
@@ -158,16 +159,81 @@ namespace ScadaGUI
         {
             Application.Current.Dispatcher.Invoke(() =>
             {
-                AlarmList.ItemsSource = Context.Alarms.ToList();
+                var TriggeredAlarm = sender as Alarm;
+                var row = FindAlarmOnDataGrid(TriggeredAlarm);
+                if(row is null)
+                {
+                    return;
+                }
+
+                if (!TriggeredAlarm.IsActive)
+                {
+                    MessageBox.Show("Alarm prihvaćen!", "Alarm", MessageBoxButton.OK, MessageBoxImage.Information);
+
+                    row.Background = Brushes.White;
+                    AlarmList.SelectedIndex = -1;
+
+                    return;
+                }
+
+                try
+                {
+                    AlarmHistorySample alarmHistorySample = new AlarmHistorySample()
+                    {
+                        AlarmId = TriggeredAlarm.Id,
+                        VarName = TriggeredAlarm.AnalogInputName,
+                        Message = TriggeredAlarm.Description,
+                        TimeStamp = DateTime.Now
+                    };
+                    alarmHistorySample.Id = $"{alarmHistorySample.Id}_{alarmHistorySample.TimeStamp}";
+
+                    Context.AlarmHistory.Add(alarmHistorySample);
+                    Context.SaveChanges();
+
+                    row.Background = Brushes.Red;
+                    AlarmList.SelectedIndex = -1;
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            MessageBox.Show($"{ve.PropertyName}, {ve.ErrorMessage}");
+                        }
+                    }
+                    return;
+                }
             });
         }
-
+        private void AcknowledgeAlarm(object sender, MouseButtonEventArgs e)
+        {
+            Alarm alarm = (sender as DataGridRow)?.DataContext as Alarm;
+            alarm.IsAcknowledged = true;
+            alarm.IsActive = false;
+        }
+        private DataGridRow FindAlarmOnDataGrid(Alarm alarm)
+        {
+            foreach (var dataGridItem in AlarmList.Items)
+            {
+                if (dataGridItem == alarm)
+                {
+                    return (DataGridRow)AlarmList.ItemContainerGenerator.ContainerFromIndex(AlarmList.Items.IndexOf(dataGridItem));
+                }
+            }
+            return null;
+        }
         private void Window_Closing(object sender, CancelEventArgs e)
         {
             foreach (var analogInput in Context.AnalogInputs)
             {
                 analogInput.Scanner.Abort();
                 analogInput.PropertyChanged -= UpdateAnalogDataGrid;
+
+                foreach(var alarm in analogInput.Alarms)
+                {
+                    alarm.PropertyChanged -= UpdateAlarms;
+                }
             }
             foreach (var digitalInput in Context.DigitalInputs)
             {

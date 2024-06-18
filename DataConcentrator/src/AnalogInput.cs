@@ -55,16 +55,24 @@ namespace DataConcentrator.src
                     }
                     if(alarm.ActivationEdge == AlarmActivationEdge.Rising)
                     {
-                        if(Value > alarm.ActivationValue && Value > previousValue)
+                        if(Value > alarm.ActivationValue && Value > previousValue && !alarm.IsAcknowledged)
                         {
                             alarm.IsActive = true;
+                        }
+                        if(Value < alarm.ActivationValue)
+                        {
+                            alarm.IsAcknowledged = false;
                         }
                     }
                     else
                     {
-                        if(Value < alarm.ActivationValue && Value < previousValue)
+                        if(Value < alarm.ActivationValue && Value < previousValue && !alarm.IsAcknowledged)
                         {
                             alarm.IsActive = true;
+                        }
+                        if (Value > alarm.ActivationValue)
+                        {
+                            alarm.IsAcknowledged = false;
                         }
                     }
                 }

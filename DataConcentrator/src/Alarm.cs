@@ -29,9 +29,8 @@ namespace DataConcentrator.src
 
         public string Description { get; set; }
 
-        private bool _isactive;
-
         public event PropertyChangedEventHandler PropertyChanged;
+        private bool _isactive;
 
         [NotMapped]
         public bool IsActive
@@ -40,9 +39,13 @@ namespace DataConcentrator.src
             set
             {
                 _isactive = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsActive)));
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsActive))); 
             }
         }
+
+        [NotMapped]
+        public bool IsAcknowledged { get; set; }
+
         [Required]
         public double ActivationValue { get; set; }
 

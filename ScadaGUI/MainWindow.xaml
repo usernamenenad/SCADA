@@ -61,9 +61,8 @@
                 </materialDesign:Card.Background>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="2*"/>
-                        <RowDefinition Height="0.5*"/>
-                        <RowDefinition Height="3.5*"/>
+                        <RowDefinition Height="5*"/>
+                        <RowDefinition Height="4*"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
@@ -90,7 +89,6 @@
                             <Button Style="{StaticResource Button1}" Click="AddAnalogOutput">Dodaj analogni izlaz</Button>
                             <Button Style="{StaticResource Button1}" Click="AddDigitalInput">Dodaj digitalni ulaz</Button>
                             <Button Style="{StaticResource Button1}" Click="AddDigitalOutput">Dodaj digitalni izlaz</Button>
-                            <Button Style="{StaticResource Button1}" Click="AddAlarm">Dodaj alarm</Button>
                         </UniformGrid>
                     </Grid>
                     
@@ -235,7 +233,7 @@
                                   x:Name="AlarmList">
                             <DataGrid.Resources>
                                 <Style TargetType="DataGridRow">
-                                    <EventSetter Event="MouseDoubleClick" Handler="EditAlarm"/>
+                                    <EventSetter Event="MouseDoubleClick" Handler="AcknowledgeAlarm"/>
                                 </Style>
                             </DataGrid.Resources>
                             <DataGrid.Columns>

@@ -7,7 +7,6 @@ namespace DataConcentrator.src
     public class AlarmHistorySample
     {
         [Key]
-        [Required]
         public string Id { get; set; }
 
         [Required]
@@ -20,13 +19,5 @@ namespace DataConcentrator.src
 
         [Required]
         public DateTime TimeStamp { get; set; }
-
-        public AlarmHistorySample(string alarmId, string varName, string message, DateTime timeStamp) 
-        {
-            AlarmId = alarmId;
-            VarName = varName;
-            Message = message;
-            TimeStamp = timeStamp;
-        }
     }
 }
