@@ -233,8 +233,14 @@
                     <materialDesign:Card Margin="5">
                         <DataGrid Margin="5"
                                   x:Name="AlarmList">
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="EditAlarm"/>
+                                </Style>
+                            </DataGrid.Resources>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Ime" Binding="{Binding Name}" Width="*"></DataGridTextColumn>
+                                <DataGridTextColumn Header="Aktivan" Binding="{Binding IsActive}" Width="*"></DataGridTextColumn>
                             </DataGrid.Columns>
                         </DataGrid>
                     </materialDesign:Card>

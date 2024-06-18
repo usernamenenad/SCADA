@@ -114,7 +114,7 @@ namespace PLCSimulator
 
                 lock (locker)
                 {
-                    AnalogInputAddress["ADDR000"] = 100 * Math.Sin((double)DateTime.Now.Second / 60 * Math.PI); //SINE
+                    AnalogInputAddress["ADDR000"] = 30 * Math.Sin((double)DateTime.Now.Second / 60 * Math.PI); //SINE
                     AnalogInputAddress["ADDR001"] = 100 * DateTime.Now.Second / 60; //RAMP
                     AnalogInputAddress["ADDR002"] = 50 * Math.Cos((double)DateTime.Now.Second / 60 * Math.PI); //COS
                     AnalogInputAddress["ADDR003"] = RandomNumberBetween(0, 50);  //rand

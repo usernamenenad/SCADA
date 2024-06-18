@@ -65,11 +65,6 @@
                                      IsEnabled="{Binding ElementName=LowestAlarmCheckBox, Path=IsChecked}"/>
                         </StackPanel>
                         <StackPanel>
-                            <TextBlock Text="Alarm aktivan"/>
-                            <ComboBox Name="LowestAlarmIsActive"
-                                      IsEnabled="{Binding ElementName=LowestAlarmCheckBox, Path=IsChecked}"/>
-                        </StackPanel>
-                        <StackPanel>
                             <TextBlock Text="Vrijednost aktivacije"/>
                             <TextBox Name="LowestAlarmActivationValue"
                                      IsEnabled="{Binding ElementName=LowestAlarmCheckBox, Path=IsChecked}"/>
@@ -105,11 +100,6 @@
                             <TextBlock Text="Opis alarma"/>
                             <TextBox Name="LowAlarmDescription"
                                      IsEnabled="{Binding ElementName=LowAlarmCheckBox, Path=IsChecked}"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock Text="Alarm aktivan"/>
-                            <ComboBox Name="LowAlarmIsActive"
-                                      IsEnabled="{Binding ElementName=LowAlarmCheckBox, Path=IsChecked}"/>
                         </StackPanel>
                         <StackPanel>
                             <TextBlock Text="Vrijednost aktivacije"/>
@@ -149,11 +139,6 @@
                                      IsEnabled="{Binding ElementName=MediumAlarmCheckBox, Path=IsChecked}"/>
                         </StackPanel>
                         <StackPanel>
-                            <TextBlock Text="Alarm aktivan"/>
-                            <ComboBox Name="MediumAlarmIsActive"
-                                      IsEnabled="{Binding ElementName=MediumAlarmCheckBox, Path=IsChecked}"/>
-                        </StackPanel>
-                        <StackPanel>
                             <TextBlock Text="Vrijednost aktivacije"/>
                             <TextBox Name="MediumAlarmActivationValue"
                                      IsEnabled="{Binding ElementName=MediumAlarmCheckBox, Path=IsChecked}"/>
@@ -191,11 +176,6 @@
                                      IsEnabled="{Binding ElementName=HighAlarmCheckBox, Path=IsChecked}"/>
                         </StackPanel>
                         <StackPanel>
-                            <TextBlock Text="Alarm aktivan"/>
-                            <ComboBox Name="HighAlarmIsActive"
-                                      IsEnabled="{Binding ElementName=HighAlarmCheckBox, Path=IsChecked}"/>
-                        </StackPanel>
-                        <StackPanel>
                             <TextBlock Text="Vrijednost aktivacije"/>
                             <TextBox Name="HighAlarmActivationValue"
                                      IsEnabled="{Binding ElementName=HighAlarmCheckBox, Path=IsChecked}"/>
@@ -231,11 +211,6 @@
                             <TextBlock Text="Opis alarma"/>
                             <TextBox Name="HighestAlarmDescription"
                                      IsEnabled="{Binding ElementName=HighestAlarmCheckBox, Path=IsChecked}"/>
-                        </StackPanel>
-                        <StackPanel>
-                            <TextBlock Text="Alarm aktivan"/>
-                            <ComboBox Name="HighestAlarmIsActive"
-                                      IsEnabled="{Binding ElementName=HighestAlarmCheckBox, Path=IsChecked}"/>
                         </StackPanel>
                         <StackPanel>
                             <TextBlock Text="Vrijednost aktivacije"/>

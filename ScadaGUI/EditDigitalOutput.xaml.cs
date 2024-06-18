@@ -97,6 +97,37 @@ namespace ScadaGUI
         }
         private void Delete(object sender, RoutedEventArgs e)
         {
+            var result = MessageBox.Show("Da li ste sigurni da želite obrisati digitalni izlaz?", "Upozorenje", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    Context.DigitalOutputs.Remove(DigitalOutput);
+                    Context.SaveChanges();
+
+                    Manager.FreeDigitalOutput(DigitalOutput.Address);
+                }
+                catch (DbEntityValidationException ex)
+                {
+                    foreach (var eve in ex.EntityValidationErrors)
+                    {
+                        foreach (var ve in eve.ValidationErrors)
+                        {
+                            MessageBox.Show($"{ve.PropertyName}, {ve.ErrorMessage}");
+                        }
+                    }
+                    return;
+                }
+                catch (Exception ex) 
+                {
+                    MessageBox.Show($"{ex}", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+
+                DigitalOutputsList.ItemsSource = Context.DigitalOutputs.ToList();
+
+                Close();
+            }
         }
         private void Cancel(object sender, RoutedEventArgs e)
         {

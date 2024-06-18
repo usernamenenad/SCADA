@@ -35,8 +35,10 @@ namespace ScadaGUI
             Name.Text = analogOutput.Name;
             Description.Text = analogOutput.Description;
 
-            List<string> AddressDisplay = new List<string>(Manager.AvailibleAnalogOutputs);
-            AddressDisplay.Add(analogOutput.Address);
+            List<string> AddressDisplay = new List<string>(Manager.AvailibleAnalogOutputs) 
+            {
+                analogOutput.Address
+            };
             AddressDisplay.Sort();
 
             Address.ItemsSource = AddressDisplay;
@@ -123,6 +125,11 @@ namespace ScadaGUI
                             MessageBox.Show($"{ve.PropertyName}, {ve.ErrorMessage}");
                         }
                     }
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"{ex}", "Greška", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 

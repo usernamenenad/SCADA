@@ -13,7 +13,6 @@ namespace ScadaGUI
         public TextBox Id;
         public TextBox Name;
         public TextBox Description;
-        public ComboBox IsActive;
         public TextBox ActivationValue;
         public ComboBox ActivatesAt;
     }
@@ -44,7 +43,6 @@ namespace ScadaGUI
             InitializeComponent();
 
             List<string> EdgeValues = EdgeMap.Keys.ToList();
-            List<string> IsActiveValues = new List<string>() { "Aktivan", "Neaktivan" };
 
             if(analogInputAlarms.Any())
             {
@@ -56,13 +54,6 @@ namespace ScadaGUI
             MediumAlarmActivatesAt.ItemsSource = EdgeValues;
             HighAlarmActivatesAt.ItemsSource = EdgeValues;
             HighestAlarmActivatesAt.ItemsSource = EdgeValues;
-
-            LowestAlarmIsActive.ItemsSource = IsActiveValues;
-            LowAlarmIsActive.ItemsSource = IsActiveValues;
-            MediumAlarmIsActive.ItemsSource = IsActiveValues;
-            HighAlarmIsActive.ItemsSource = IsActiveValues;
-            HighestAlarmIsActive.ItemsSource = IsActiveValues;
-
 
             TagId = tagId;
             TagName = tagName;
@@ -94,7 +85,6 @@ namespace ScadaGUI
                         LowestAlarmId.Text = alarm.Id;
                         LowestAlarmName.Text = alarm.Name;
                         LowestAlarmDescription.Text = alarm.Description;
-                        LowestAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
                         LowestAlarmActivationValue.Text = alarm.ActivationValue.ToString();
                         LowestAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
                         break;
@@ -104,7 +94,6 @@ namespace ScadaGUI
                         LowAlarmId.Text = alarm.Id;
                         LowAlarmName.Text = alarm.Name;
                         LowAlarmDescription.Text = alarm.Description;
-                        LowAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
                         LowAlarmActivationValue.Text = alarm.ActivationValue.ToString();
                         LowAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
                         break;
@@ -114,7 +103,6 @@ namespace ScadaGUI
                         MediumAlarmId.Text = alarm.Id;
                         MediumAlarmName.Text = alarm.Name;
                         MediumAlarmDescription.Text = alarm.Description;
-                        MediumAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
                         MediumAlarmActivationValue.Text = alarm.ActivationValue.ToString();
                         MediumAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
                         break;
@@ -124,7 +112,6 @@ namespace ScadaGUI
                         HighAlarmId.Text = alarm.Id;
                         HighAlarmName.Text = alarm.Name;
                         HighAlarmDescription.Text = alarm.Description;
-                        HighAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
                         HighAlarmActivationValue.Text = alarm.ActivationValue.ToString();
                         HighAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
                         break;
@@ -134,7 +121,6 @@ namespace ScadaGUI
                         HighestAlarmId.Text = alarm.Id;
                         HighestAlarmName.Text = alarm.Name;
                         HighestAlarmDescription.Text = alarm.Description;
-                        HighestAlarmIsActive.SelectedItem = alarm.IsActive ? "Aktivan" : "Neaktivan";
                         HighestAlarmActivationValue.Text = alarm.ActivationValue.ToString();
                         HighestAlarmActivatesAt.SelectedItem = alarm.ActivationEdge == AlarmActivationEdge.Rising ? EdgeMap.Keys.ToList()[0] : EdgeMap.Keys.ToList()[1];
                         break;
@@ -154,7 +140,6 @@ namespace ScadaGUI
                 Id = LowestAlarmId,
                 Name = LowestAlarmName,
                 Description = LowestAlarmDescription,
-                IsActive = LowestAlarmIsActive,
                 ActivationValue = LowestAlarmActivationValue,
                 ActivatesAt = LowestAlarmActivatesAt,
             });
@@ -165,7 +150,6 @@ namespace ScadaGUI
                 Id = LowAlarmId,
                 Name = LowAlarmName,
                 Description = LowAlarmDescription,
-                IsActive = LowAlarmIsActive,
                 ActivationValue = LowAlarmActivationValue,
                 ActivatesAt = LowAlarmActivatesAt,
             });
@@ -176,7 +160,6 @@ namespace ScadaGUI
                 Id = MediumAlarmId,
                 Name = MediumAlarmName,
                 Description = MediumAlarmDescription,
-                IsActive = MediumAlarmIsActive,
                 ActivationValue = MediumAlarmActivationValue,
                 ActivatesAt = MediumAlarmActivatesAt,
             });
@@ -187,7 +170,6 @@ namespace ScadaGUI
                 Id = HighAlarmId,
                 Name = HighAlarmName,
                 Description= HighAlarmDescription,
-                IsActive = HighAlarmIsActive,
                 ActivationValue = HighAlarmActivationValue,
                 ActivatesAt = HighAlarmActivatesAt,
             });
@@ -198,7 +180,6 @@ namespace ScadaGUI
                 Id = HighestAlarmId,
                 Name = HighestAlarmName,
                 Description = HighestAlarmDescription,
-                IsActive = HighestAlarmIsActive,
                 ActivationValue = HighestAlarmActivationValue,
                 ActivatesAt = HighestAlarmActivatesAt,
             });
@@ -219,7 +200,7 @@ namespace ScadaGUI
                         existingAlarm.Id = alarmGUIItem.Id.Text;
                         existingAlarm.Name = alarmGUIItem.Name.Text;
                         existingAlarm.Description = alarmGUIItem.Description.Text;
-                        existingAlarm.IsActive = alarmGUIItem.IsActive.Text == "Aktivan";
+                        existingAlarm.IsActive = false;
                         existingAlarm.ActivationValue = double.Parse(alarmGUIItem.ActivationValue.Text);
                         existingAlarm.ActivationEdge = EdgeMap[alarmGUIItem.ActivatesAt.Text];
                         existingAlarm.Priority = PriorityMap[alarmGUIItem.Type];
@@ -228,18 +209,23 @@ namespace ScadaGUI
                     }
                     else
                     {
-                        AnalogInputAlarms.Add(new Alarm()
+                        var newAlarm = new Alarm()
                         {
                             Id = alarmGUIItem.Id.Text,
                             Name = alarmGUIItem.Name.Text,
                             Description = alarmGUIItem.Description.Text,
-                            IsActive = alarmGUIItem.IsActive.Text == "Aktivan",
+                            IsActive = false,
                             ActivationValue = double.Parse(alarmGUIItem.ActivationValue.Text),
                             ActivationEdge = EdgeMap[alarmGUIItem.ActivatesAt.Text],
                             Priority = PriorityMap[alarmGUIItem.Type],
                             AnalogInputId = TagId,
                             AnalogInputName = TagName,
-                        });
+                        };
+                        if(Owner.Owner is MainWindow window)
+                        {
+                            newAlarm.PropertyChanged += window.UpdateAlarms;
+                        }
+                        AnalogInputAlarms.Add(newAlarm);
                     }
                 }
                 else
@@ -270,12 +256,6 @@ namespace ScadaGUI
                     return false;
                 }
 
-                // Is the activation of the alarm set
-                if (alarmGUIItem.IsActive.SelectedItem == null)
-                {
-                    error += $"Niste selektovali da li je alarm tipa \"{alarmGUIItem.Type}\" aktiviran!";
-                    return false;
-                }
                 if(alarmGUIItem.ActivatesAt.SelectedItem == null)
                 {
                     error += $"Niste selektovali na koju ivicu tipa \"{alarmGUIItem.Type}\" se aktivira!";

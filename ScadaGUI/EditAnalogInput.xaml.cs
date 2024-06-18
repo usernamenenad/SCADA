@@ -181,13 +181,6 @@ namespace ScadaGUI
                 return true;
             }
 
-            // Is that tag already in the table
-            if (Context.AnalogInputs.Any(analogInput => analogInput.Id == Tag.Text))
-            {
-                errorMessage += "Već postoji takav tag!";
-                return true;
-            }
-
             // Is the Name given
             if (string.IsNullOrEmpty(Name.Text))
             {
@@ -226,6 +219,14 @@ namespace ScadaGUI
             if (string.IsNullOrEmpty(Tag.Text))
             {
                 errorMessage += "Niste upisali tag!";
+                return true;
+            }
+
+            // Is that tag already in the table 
+            var checkIfAnalogInputExists = Context.AnalogInputs.FirstOrDefault(AnalogInput => AnalogInput.Id == Tag.Text);
+            if (checkIfAnalogInputExists != AnalogInput)
+            {
+                errorMessage += "Već postoji takav tag!";
                 return true;
             }
 

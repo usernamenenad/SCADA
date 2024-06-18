@@ -119,6 +119,11 @@ namespace ScadaGUI
             };
             editDigitalOutput.Show();
         }
+        private void EditAlarm(object sender, MouseButtonEventArgs e)
+        {
+            Alarm alarm = (sender as DataGridRow)?.DataContext as Alarm;
+            alarm.IsActive = false;
+        }
 
         public void StartScanning()
         {
@@ -147,6 +152,13 @@ namespace ScadaGUI
             Application.Current.Dispatcher.Invoke(() =>
             {
                 DigitalInputsList.ItemsSource = Context.DigitalInputs.ToList();
+            });
+        }
+        public void UpdateAlarms(object sender, PropertyChangedEventArgs e)
+        {
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                AlarmList.ItemsSource = Context.Alarms.ToList();
             });
         }
 

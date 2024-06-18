@@ -35,6 +35,13 @@ namespace DataConcentrator
         // Set outputs
         public void SetOutputs()
         {
+            foreach(var analogInput in Context.AnalogInputs)
+            {
+                foreach(var alarm in analogInput.Alarms)
+                {
+                    alarm.IsActive = false;
+                }
+            }
             foreach (var analogOutput in Context.AnalogOutputs)
             {
                 analogOutput.Value = analogOutput.InitialValue;

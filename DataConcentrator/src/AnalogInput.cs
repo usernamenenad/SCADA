@@ -39,11 +39,34 @@ namespace DataConcentrator.src
 
         public void Scan(PLCManager Manager)
         {
+            double previousValue = Value;
             while(true)
             {
-                if(OnOffScan)
+                previousValue = Value;
+                if (OnOffScan)
                 {
                     Value = Manager.SimulatorManager.GetAnalogValue(Address);
+                }
+                foreach (Alarm alarm in Alarms)
+                {
+                    if(alarm.IsActive)
+                    {
+                        continue;
+                    }
+                    if(alarm.ActivationEdge == AlarmActivationEdge.Rising)
+                    {
+                        if(Value > alarm.ActivationValue && Value > previousValue)
+                        {
+                            alarm.IsActive = true;
+                        }
+                    }
+                    else
+                    {
+                        if(Value < alarm.ActivationValue && Value < previousValue)
+                        {
+                            alarm.IsActive = true;
+                        }
+                    }
                 }
                 Thread.Sleep((int)(ScanTime * 1000));
             }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -17,7 +18,7 @@ namespace DataConcentrator.src
         Rising,
         Falling
     }
-    public class Alarm
+    public class Alarm : INotifyPropertyChanged
     {
         [Key]
         [Required]
@@ -28,9 +29,20 @@ namespace DataConcentrator.src
 
         public string Description { get; set; }
 
-        [Required]
-        public bool IsActive { get; set; }
+        private bool _isactive;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        [NotMapped]
+        public bool IsActive
+        {
+            get => _isactive;
+            set
+            {
+                _isactive = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsActive)));
+            }
+        }
         [Required]
         public double ActivationValue { get; set; }
 
@@ -47,12 +59,5 @@ namespace DataConcentrator.src
 
         [Required]
         public string AnalogInputName { get; set; } 
-
-        public static event Action<Alarm> OnAlarmTriggered;
-
-        public void TriggerAlarm()
-        {
-            OnAlarmTriggered?.Invoke(this);
-        }
     }
 }

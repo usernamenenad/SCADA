@@ -15,3 +15,4 @@ C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\bin\Debug\PLCSimulator.dll.config
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConcentrator.Migrations.Init.resources
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConcentrator.csproj.GenerateResource.cache
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\DataConcentrator\obj\Debug\DataConcentrator.Migrations.IsActiveChange.resources
