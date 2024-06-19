@@ -51,3 +51,9 @@ C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditDig
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditDigitalInput.baml
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditDigitalOutput.g.cs
 C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\obj\Debug\EditDigitalOutput.baml
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\bin\Debug\LiveCharts.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\bin\Debug\LiveCharts.Wpf.dll
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\bin\Debug\LiveCharts.pdb
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\bin\Debug\LiveCharts.xml
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\bin\Debug\LiveCharts.Wpf.pdb
+C:\Users\radovic\Desktop\Files\Projects\ProjekatSCADA\ScadaGUI\bin\Debug\LiveCharts.Wpf.xml

@@ -93,8 +93,11 @@ namespace ScadaGUI
             }
 
             AnalogOutputsList.ItemsSource = Context.AnalogOutputs.ToList();
+            
+            var mainWindow = Owner as MainWindow;
+            mainWindow.NumberOfAnalogOutputs.Text = Context.AnalogOutputs.Count().ToString();
 
-            if(OldAddress != Address.Text)
+            if (OldAddress != Address.Text)
             {
                 Manager.FreeAnalogOutput(OldAddress);
                 Manager.TakeAnalogOutput(AnalogOutput.Address);
@@ -134,7 +137,10 @@ namespace ScadaGUI
                 }
 
                 AnalogOutputsList.ItemsSource = Context.AnalogOutputs.ToList();
-                
+
+                var mainWindow = Owner as MainWindow;
+                mainWindow.NumberOfAnalogOutputs.Text = Context.AnalogOutputs.Count().ToString();
+
                 Close();
             }
         }
@@ -154,13 +160,6 @@ namespace ScadaGUI
             if (string.IsNullOrEmpty(Tag.Text))
             {
                 errorMessage += "Niste upisali tag!";
-                return true;
-            }
-
-            // Is that tag already in the table
-            if (Context.AnalogOutputs.Any(analogOutput => analogOutput.Id == Tag.Text))
-            {
-                errorMessage += "Već postoji takav tag!";
                 return true;
             }
 

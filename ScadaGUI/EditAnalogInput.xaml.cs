@@ -101,8 +101,14 @@ namespace ScadaGUI
             AnalogInputsList.ItemsSource = Context.AnalogInputs.ToList();
             AlarmList.ItemsSource = Context.Alarms.ToList();
 
-            Manager.FreeAnalogInput(OldAddress);
-            Manager.TakeAnalogInput(Address.Text);
+            var mainWindow = Owner as MainWindow;
+            mainWindow.NumberOfAnalogInputs.Text = Context.AnalogInputs.Count().ToString();
+
+            if (OldAddress != Address.Text)
+            {
+                Manager.FreeAnalogOutput(OldAddress);
+                Manager.TakeAnalogOutput(AnalogInput.Address);
+            }
 
             MessageBox.Show("Uspješno uređen analogni ulaz!", "Uredi analogni ulaz", MessageBoxButton.OK, MessageBoxImage.Information);
 
@@ -140,6 +146,9 @@ namespace ScadaGUI
 
                 AnalogInputsList.ItemsSource = Context.AnalogInputs.ToList();
                 AlarmList.ItemsSource = Context.Alarms.ToList();
+
+                var mainWindow = Owner as MainWindow;
+                mainWindow.NumberOfAnalogInputs.Text = Context.AnalogInputs.Count().ToString();
 
                 Close();
             }
@@ -219,14 +228,6 @@ namespace ScadaGUI
             if (string.IsNullOrEmpty(Tag.Text))
             {
                 errorMessage += "Niste upisali tag!";
-                return true;
-            }
-
-            // Is that tag already in the table 
-            var checkIfAnalogInputExists = Context.AnalogInputs.FirstOrDefault(AnalogInput => AnalogInput.Id == Tag.Text);
-            if (checkIfAnalogInputExists != AnalogInput)
-            {
-                errorMessage += "Već postoji takav tag!";
                 return true;
             }
 

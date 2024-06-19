@@ -84,7 +84,10 @@ namespace ScadaGUI
 
             DigitalInputsList.ItemsSource = Context.DigitalInputs.ToList();
 
-            if(OldAddress != Address.Text)
+            var mainWindow = Owner as MainWindow;
+            mainWindow.NumberOfDigitalInputs.Text = Context.DigitalInputs.Count().ToString();
+
+            if (OldAddress != Address.Text)
             {            
                 Manager.FreeDigitalInput(OldAddress);
                 Manager.TakeDigitalInput(Address.Text);
@@ -121,6 +124,9 @@ namespace ScadaGUI
 
                 DigitalInputsList.ItemsSource = Context.DigitalInputs.ToList();
 
+                var mainWindow = Owner as MainWindow;
+                mainWindow.NumberOfDigitalInputs.Text = Context.DigitalInputs.Count().ToString();
+
                 Close();
             }
         }
@@ -140,13 +146,6 @@ namespace ScadaGUI
             if (string.IsNullOrEmpty(Tag.Text))
             {
                 errorMessage += "Niste upisali tag!";
-                return true;
-            }
-
-            // Is that tag already in the table
-            if (Context.DigitalInputs.Any(digitalOutput => digitalOutput.Id == Tag.Text))
-            {
-                errorMessage += "Već postoji takav tag!";
                 return true;
             }
 

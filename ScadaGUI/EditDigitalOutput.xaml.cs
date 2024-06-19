@@ -84,8 +84,11 @@ namespace ScadaGUI
             }
 
             DigitalOutputsList.ItemsSource = Context.DigitalOutputs.ToList();
-            
-            if(OldAddress != Address.Text)
+
+            var mainWindow = Owner as MainWindow;
+            mainWindow.NumberOfDigitalOutputs.Text = Context.DigitalOutputs.Count().ToString();
+
+            if (OldAddress != Address.Text)
             {
                 Manager.FreeDigitalOutput(OldAddress);
                 Manager.TakeDigitalOutput(DigitalOutput.Address);
@@ -125,6 +128,9 @@ namespace ScadaGUI
                 }
 
                 DigitalOutputsList.ItemsSource = Context.DigitalOutputs.ToList();
+
+                var mainWindow = Owner as MainWindow;
+                mainWindow.NumberOfDigitalOutputs.Text = Context.DigitalOutputs.Count().ToString();
 
                 Close();
             }

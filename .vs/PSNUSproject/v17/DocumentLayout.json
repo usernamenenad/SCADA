@@ -9,10 +9,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\scadagui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{E6C18285-8FF8-4C84-8FDD-2BB92D74B554}|ScadaGUI\\ScadaGUI.csproj|solutionrelative:scadagui\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{024884F0-496F-4426-A0CE-45FF39AE24A6}|DataConcentrator\\DataConcentrator.csproj|c:\\users\\radovic\\desktop\\files\\projects\\projekatscada\\dataconcentrator\\src\\alarmhistorysample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{024884F0-496F-4426-A0CE-45FF39AE24A6}|DataConcentrator\\DataConcentrator.csproj|solutionrelative:dataconcentrator\\src\\alarmhistorysample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,24 +18,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AlarmHistorySample.cs",
-              "DocumentMoniker": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\DataConcentrator\\src\\AlarmHistorySample.cs",
-              "RelativeDocumentMoniker": "DataConcentrator\\src\\AlarmHistorySample.cs",
-              "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\DataConcentrator\\src\\AlarmHistorySample.cs",
-              "RelativeToolTip": "DataConcentrator\\src\\AlarmHistorySample.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAVAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T13:18:15.587Z",
-              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -50,7 +33,7 @@
               "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\MainWindow.xaml",
               "RelativeToolTip": "ScadaGUI\\MainWindow.xaml",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2024-06-18T13:14:12.181Z",
+              "WhenOpened": "2024-06-19T07:04:05.545Z",
               "EditorCaption": ""
             },
             {
@@ -61,9 +44,9 @@
               "RelativeDocumentMoniker": "ScadaGUI\\MainWindow.xaml.cs",
               "ToolTip": "C:\\Users\\radovic\\Desktop\\Files\\Projects\\ProjekatSCADA\\ScadaGUI\\MainWindow.xaml.cs",
               "RelativeToolTip": "ScadaGUI\\MainWindow.xaml.cs",
-              "ViewState": "AQIAAJsAAAAAAAAAAAAuwLoAAAAWAAAA",
+              "ViewState": "AQIAAAwAAAAAAAAAAAAAABkAAAA6AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-06-18T13:13:35.491Z",
+              "WhenOpened": "2024-06-19T07:03:11.891Z",
               "EditorCaption": ""
             }
           ]

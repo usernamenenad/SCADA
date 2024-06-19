@@ -241,7 +241,8 @@
                         <Setter Property="BorderBrush" Value="#abdbe3"/>
                     </Style>
                 </StackPanel.Resources>
-                <Button Style="{StaticResource Button1}">Otkaži</Button>
+                <Button Style="{StaticResource Button1}"
+                        Click="Cancel">Otkaži</Button>
                 <Button Style="{StaticResource Button1}"
                         Click="Save">Potvrdi</Button>
             </StackPanel>

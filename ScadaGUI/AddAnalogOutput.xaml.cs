@@ -53,6 +53,9 @@ namespace ScadaGUI
             AnalogOutputsList.ItemsSource = Context.AnalogOutputs.ToList();
             Manager.TakeAnalogOutput(AnalogOutput.Address);
 
+            var mainWindow = Owner as MainWindow;
+            mainWindow.NumberOfAnalogOutputs.Text = Context.AnalogOutputs.Count().ToString();
+
             MessageBox.Show("Uspješno dodat analogni izlaz!", "Dodaj analogni izlaz", MessageBoxButton.OK, MessageBoxImage.Information);
 
             Close();

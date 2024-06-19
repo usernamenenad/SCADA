@@ -72,6 +72,14 @@ namespace ScadaGUI
             MessageBox.Show("Uspješno dodat alarm!");
             Close();
         }
+        public void Cancel(object sender, RoutedEventArgs e)
+        {
+            var result = MessageBox.Show("Da li ste sigurni da želite otkazati dodavanje?", "Greška", MessageBoxButton.YesNoCancel, MessageBoxImage.Question);
+            if (result == MessageBoxResult.Yes)
+            {
+                Close();
+            }
+        }
         public void FillAlarms(List<Alarm> alarms)
         {
             foreach (Alarm alarm in alarms)

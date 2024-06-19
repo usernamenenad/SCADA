@@ -40,15 +40,14 @@ namespace ScadaGUI
                 return;
             }
 
+            var mainWindow = Owner as MainWindow;
+
             try
             {
                 Context.AnalogInputs.Add(AnalogInput);
 
-                if (Owner is MainWindow mainWindow)
-                {
-                    AnalogInput.Scanner = new Thread(() => AnalogInput.Scan(Manager));
-                    AnalogInput.Scanner.Start();
-                }
+                AnalogInput.Scanner = new Thread(() => AnalogInput.Scan(Manager));
+                AnalogInput.Scanner.Start();
 
                 Context.SaveChanges();
             }
@@ -65,6 +64,9 @@ namespace ScadaGUI
             }
 
             AnalogInputsList.ItemsSource = Context.AnalogInputs.ToList();
+
+            mainWindow.NumberOfAnalogInputs.Text = Context.AnalogInputs.Count().ToString();
+
             AlarmList.ItemsSource = Context.Alarms.ToList();
             Manager.TakeAnalogInput(AnalogInput.Address);
             MessageBox.Show("Uspješno uređen analogni ulaz!", "Dodaj analogni ulaz", MessageBoxButton.OK, MessageBoxImage.Information);

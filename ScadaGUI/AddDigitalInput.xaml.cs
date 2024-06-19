@@ -42,16 +42,14 @@ namespace ScadaGUI
                 return;
             }
 
+            var mainWindow = Owner as MainWindow;
+
             try
             {
                 Context.DigitalInputs.Add(DigitalInput);
-
-                if (Owner is MainWindow mainWindow)
-                {
-                    DigitalInput.Scanner = new Thread(() => DigitalInput.Scan(Manager));
-                    DigitalInput.PropertyChanged += mainWindow.UpdateDigitalDataGrid;
-                    DigitalInput.Scanner.Start();
-                }
+                DigitalInput.Scanner = new Thread(() => DigitalInput.Scan(Manager));
+                DigitalInput.PropertyChanged += mainWindow.UpdateDigitalDataGrid;
+                DigitalInput.Scanner.Start();
 
                 Context.SaveChanges();
             }
@@ -68,6 +66,9 @@ namespace ScadaGUI
             }
 
             DigitalInputsList.ItemsSource = Context.DigitalInputs.ToList();
+
+            mainWindow.NumberOfDigitalInputs.Text = Context.DigitalInputs.Count().ToString();
+
             Manager.TakeDigitalInput(DigitalInput.Address);
             MessageBox.Show("Uspješno uređen digitalni ulaz!", "Dodaj digitalni ulaz", MessageBoxButton.OK, MessageBoxImage.Information);
         }

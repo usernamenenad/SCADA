@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
         xmlns:local="clr-namespace:ScadaGUI"
         mc:Ignorable="d"
         Title="SCADA" 
@@ -61,8 +62,8 @@
                 </materialDesign:Card.Background>
                 <Grid>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="5*"/>
-                        <RowDefinition Height="4*"/>
+                        <RowDefinition Height="2*"/>
+                        <RowDefinition Height="3*"/>
                     </Grid.RowDefinitions>
 
                     <Grid Grid.Row="0">
@@ -89,6 +90,7 @@
                             <Button Style="{StaticResource Button1}" Click="AddAnalogOutput">Dodaj analogni izlaz</Button>
                             <Button Style="{StaticResource Button1}" Click="AddDigitalInput">Dodaj digitalni ulaz</Button>
                             <Button Style="{StaticResource Button1}" Click="AddDigitalOutput">Dodaj digitalni izlaz</Button>
+                            <Button Style="{StaticResource Button1}" Click="GenerateReport">Generiši izvještaj</Button>
                         </UniformGrid>
                     </Grid>
                     
@@ -111,7 +113,7 @@
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="40"
-                                       Text="{Binding NumberOfAnalogInputs}"/>
+                                       Name="NumberOfAnalogInputs"/>
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        FontSize="15"
@@ -123,7 +125,7 @@
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="40"
-                                       Text="{Binding NumberOfAnalogOutputs}"/>
+                                       Name="NumberOfAnalogOutputs"/>
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        FontSize="15"
@@ -135,7 +137,7 @@
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="40"
-                                       Text="{Binding NumberOfDigitalInputs}"/> 
+                                       Name="NumberOfDigitalInputs"/> 
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        FontSize="15"
@@ -147,7 +149,7 @@
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="40"
-                                       Text="{Binding NumberOfDigitalOutputs}"/> 
+                                       Name="NumberOfDigitalOutputs"/> 
                             <TextBlock VerticalAlignment="Center"
                                        HorizontalAlignment="Left"
                                        FontSize="15"
@@ -247,10 +249,34 @@
                 <Grid Grid.Column="1">
                     <UniformGrid Rows="1">
                         <materialDesign:Card Margin="5">
-
+                            <lvc:CartesianChart Margin="5"
+                                                Zoom="X"
+                                                Pan="X"
+                                                LegendLocation="None"
+                                                Name="AnalogInputChart"
+                                                Series="{Binding AnalogSeriesCollection}">
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Title="Vrijeme"/>
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Name="AnalogSeriesYAxis"/>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
                         </materialDesign:Card>
                         <materialDesign:Card Margin="5">
-
+                            <lvc:CartesianChart Margin="5"
+                                                Zoom="X"
+                                                Pan="X"
+                                                LegendLocation="None"
+                                                Name="DigitalInputChart"
+                                                Series="{Binding DigitalSeriesCollection}">
+                                <lvc:CartesianChart.AxisX>
+                                    <lvc:Axis Title="Vrijeme"/>
+                                </lvc:CartesianChart.AxisX>
+                                <lvc:CartesianChart.AxisY>
+                                    <lvc:Axis Name="DigitalSeriesYAxis"/>
+                                </lvc:CartesianChart.AxisY>
+                            </lvc:CartesianChart>
                         </materialDesign:Card>
                     </UniformGrid>
                 </Grid>

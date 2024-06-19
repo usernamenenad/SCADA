@@ -60,6 +60,9 @@ namespace ScadaGUI
             DigitalOutputsList.ItemsSource = Context.DigitalOutputs.ToList();
             Manager.TakeDigitalOutput(DigitalOutput.Address);
 
+            var mainWindow = Owner as MainWindow;
+            mainWindow.NumberOfDigitalOutputs.Text = Context.DigitalOutputs.Count().ToString();
+
             MessageBox.Show("Uspješno dodat digitalni izlaz!", "Dodaj analogni izlaz", MessageBoxButton.OK, MessageBoxImage.Information);
 
             Close();
